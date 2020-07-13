@@ -12,7 +12,7 @@ class BitgramActivity : AppCompatActivity() {
         if (isFragmentContainerEmpty) {
             supportFragmentManager
                     .beginTransaction()
-                    .add(R.id.fragmentContainer, BitgramFragment.newInstance())
+                    .add(R.id.fragmentContainer, BitGramFragment.newInstance())
                     .commit()
         }
     }

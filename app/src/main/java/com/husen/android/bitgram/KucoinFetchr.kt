@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
 private const val TAG = "KucoinFetchr"
@@ -18,24 +19,31 @@ class KucoinFetchr {
     init {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.kucoin.com/")
-            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         kucoinApi = retrofit.create(KucoinApi::class.java)
     }
 
-    fun fetchContents(): LiveData<String> {
-        val responseLiveData: MutableLiveData<String> = MutableLiveData()
-        val kucoinRequest = kucoinApi.fetchContents()
+    fun fetchBits(): LiveData<List<GramItem>> {
+        val responseLiveData: MutableLiveData<List<GramItem>> = MutableLiveData()
+        val kucoinRequest = kucoinApi.fetchBits()
 
-        kucoinRequest.enqueue(object : Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
+        kucoinRequest.enqueue(object : Callback<KucoinResponse> {
+            override fun onFailure(call: Call<KucoinResponse>, t: Throwable) {
                 Log.e(TAG, "Failed to fetch Bits", t)
             }
 
-            override fun onResponse(call: Call<String>, response: Response<String>) {
+            override fun onResponse(call: Call<KucoinResponse>, response: Response<KucoinResponse>) {
                 Log.d(TAG, "Response received")
-                responseLiveData.value = response.body()
+                val kucoinResponse = response.body()
+                val bitResponse = kucoinResponse?.bits
+                var gramItems = bitResponse?.gramItems
+                    ?: mutableListOf()
+                gramItems = gramItems.filterNot {
+                    it.lastPrice.isBlank()
+                }
+                responseLiveData.value = gramItems
             }
         })
     return responseLiveData
