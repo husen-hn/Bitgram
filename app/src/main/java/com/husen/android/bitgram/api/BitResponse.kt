@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import com.husen.android.bitgram.GramItem
 
 class BitResponse {
-    @SerializedName("bit")
+    @SerializedName("ticker")
     lateinit var gramItems: List<GramItem>
 }
