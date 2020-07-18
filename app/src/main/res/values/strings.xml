@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BitGram</string>
+    <string name="coin_icon">Coin Icon</string>
 </resources>

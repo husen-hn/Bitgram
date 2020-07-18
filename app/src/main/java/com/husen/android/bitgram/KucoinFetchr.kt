@@ -42,6 +42,9 @@ class KucoinFetchr {
                 gramItems = gramItems.filterNot {
                     it.lastPrice.isBlank()
                 }
+                gramItems = gramItems.filter {
+                    it.symbol.subSequence(it.symbol.length-4, it.symbol.length) == "USDT"
+                }
                 responseLiveData.value = gramItems
             }
         })

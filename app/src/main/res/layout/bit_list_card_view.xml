@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:padding="8dp"
+    app:cardBackgroundColor="@color/bgCard"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_bit_list"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/coin_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_dialog_info" />
+
+        <TextView
+            android:id="@+id/tv_bit_name_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/txtColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/iv_bit_list"
+            app:layout_constraintTop_toTopOf="@+id/iv_bit_list" />
+
+        <TextView
+            android:id="@+id/tv_bit_symbol_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/txtColor"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_bit_name_list"
+            app:layout_constraintTop_toTopOf="@+id/iv_bit_list" />
+
+        <TextView
+            android:id="@+id/tv_bit_fa_name_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/txtColor2"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_bit_list"
+            app:layout_constraintStart_toEndOf="@+id/iv_bit_list" />
+
+        <ImageView
+            android:id="@+id/iv_usa_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_bit_symbol_list"
+            app:srcCompat="@drawable/up" />
+
+        <ImageView
+            android:id="@+id/iv_ir_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_bit_fa_name_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/down" />
+
+        <TextView
+            android:id="@+id/tv_usa_percent"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:textColor="@color/Green"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_usa_arrow"
+            app:layout_constraintEnd_toStartOf="@+id/iv_usa_arrow"
+            app:layout_constraintTop_toTopOf="@+id/iv_usa_arrow" />
+
+        <TextView
+            android:id="@+id/tv_ir_percent"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:textColor="@color/darkerRed"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_ir_arrow"
+            app:layout_constraintEnd_toStartOf="@+id/iv_ir_arrow"
+            app:layout_constraintTop_toTopOf="@+id/iv_ir_arrow" />
+
+        <TextView
+            android:id="@+id/tv_usa_price"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/txtColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_usa_percent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_usa_percent"
+            app:layout_constraintTop_toTopOf="@+id/tv_usa_percent" />
+
+        <TextView
+            android:id="@+id/tv_ir_price"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/txtColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_ir_percent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_ir_percent"
+            app:layout_constraintTop_toTopOf="@+id/tv_ir_percent" />
+
+        <ImageView
+            android:id="@+id/iv_usa_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_usa_price"
+            app:layout_constraintEnd_toStartOf="@+id/tv_usa_price"
+            app:layout_constraintTop_toTopOf="@+id/tv_usa_price"
+            app:srcCompat="@drawable/usa" />
+
+        <ImageView
+            android:id="@+id/iv_ir_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_ir_price"
+            app:layout_constraintEnd_toStartOf="@+id/tv_ir_price"
+            app:layout_constraintTop_toTopOf="@+id/tv_ir_price"
+            app:srcCompat="@drawable/ir" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
