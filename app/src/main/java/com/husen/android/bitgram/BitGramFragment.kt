@@ -1,17 +1,22 @@
 package com.husen.android.bitgram
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 private const val TAG = "BitgramFragment"
 
@@ -60,11 +65,13 @@ class BitGramFragment : Fragment() {
     private inner class BitHolder(view: View)
         : RecyclerView.ViewHolder(view) {
 
-        private lateinit var item: GramItem
+        private lateinit var gramItem: GramItem
+        private var dataSource: DataSourceItem? = null
 
         // Coin Icon & Name & Symbol
         private val bitIcon: ImageView = itemView.findViewById(R.id.iv_bit_list)
         private val bitName: TextView = itemView.findViewById(R.id.tv_bit_name_list)
+        private val bitFaName: TextView = itemView.findViewById(R.id.tv_bit_fa_name_list)
         private val bitSymbol: TextView = itemView.findViewById(R.id.tv_bit_symbol_list)
 
         // Coin Price & Price Percent & Icon in $
@@ -77,12 +84,51 @@ class BitGramFragment : Fragment() {
         private val irPercent: TextView = itemView.findViewById(R.id.tv_ir_percent)
         private val irPercentIcon: ImageView = itemView.findViewById(R.id.iv_ir_arrow)
 
-        fun bind(item: GramItem, dataSource: DataSourceItem?) {
-            this.item = item
+        @SuppressLint("SetTextI18n")
+        fun bind(gramItem: GramItem, dataSource: DataSourceItem?) {
+            this.gramItem = gramItem
+            this.dataSource = dataSource
 
-            bitName.text = this.item.symbol
-            usaPrice.text = this.item.lastPrice
+            bitIcon.load(dataSource?.bitIconUrl)
 
+            bitName.text = this.dataSource?.bitName
+            bitSymbol.text = this.dataSource?.bitSymbol
+            bitFaName.text = this.dataSource?.bitFaName
+
+            usaPrice.text = "${this.gramItem.lastPrice}$"
+            usaPercent.text = "${(calPercent(
+                this.gramItem.changePrice,
+                this.gramItem.lastPrice,
+                usaPercent,
+                usaPercentIcon))}%"
+
+
+        }
+        private fun calPercent(changePrice: String, lastPrice: String,
+                               tvPercent: TextView, ivPercent: ImageView): String {
+            val changePrice = changePrice.toDouble()
+            val lastPrice = lastPrice.toDouble()
+            val initialNum = lastPrice - changePrice
+
+            val percent = ((changePrice)/(initialNum))*100
+            //Round number to 0.01
+            val df = DecimalFormat("#.#")
+            df.roundingMode = RoundingMode.CEILING
+            val RoundPercent = df.format(percent)
+
+            changePercentColorAndIcon(percent, tvPercent, ivPercent)
+
+            return RoundPercent
+        }
+        private fun changePercentColorAndIcon(percent: Double, tvPercent: TextView,
+                                              ivPercent: ImageView) {
+            if (percent >= 0) {
+                tvPercent.setTextColor(resources.getColor(R.color.Green))
+                ivPercent.load(R.drawable.up)
+            } else if( percent < 0) {
+                tvPercent.setTextColor(resources.getColor(R.color.darkerRed))
+                ivPercent.load(R.drawable.down)
+            }
         }
     }
 
@@ -98,19 +144,26 @@ class BitGramFragment : Fragment() {
         override fun getItemCount(): Int = dataSourceList.size
 
         override fun onBindViewHolder(holder: BitHolder, position: Int) {
-            val gramItem = gramItems[position]
-            val dataSource = getSymbolFromDataSource(dataSourceList, gramItem.symbol)
+            val gramItemSortedList = gramItemSortedList(gramItems, dataSourceList)
+            val gramItem = gramItemSortedList[position]
+            val dataSource = dataSourceList[position]
             holder.bind(gramItem, dataSource)
         }
     }
-    fun getSymbolFromDataSource(dataSource: ArrayList<DataSourceItem?>, bitSymbolId: String): DataSourceItem? {
-        var item: DataSourceItem? = null
-        for (index in dataSource.indices) {
-            if (dataSource[index]?.bitIdSymbol == bitSymbolId) {
-                item = dataSource[index]
+    //just sort Kucoin items with DataSource
+    private fun gramItemSortedList(gramItems: List<GramItem>, dataSourceList: ArrayList<DataSourceItem?>)
+            : ArrayList<GramItem> {
+
+        val list = arrayListOf<GramItem>()
+
+        for (dataSource in dataSourceList) {
+            for (gramItem in gramItems) {
+                if (dataSource!!.bitIdSymbol == gramItem.symbol) {
+                    list.add(gramItem)
+                }
             }
         }
-        return item
+        return list
     }
 
     companion object {
