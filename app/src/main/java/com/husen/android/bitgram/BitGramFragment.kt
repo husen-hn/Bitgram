@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -17,15 +17,17 @@ private const val TAG = "BitgramFragment"
 
 class BitGramFragment : Fragment() {
 
-    private lateinit var bitGramViewModel: BitGramViewModel
     private lateinit var bitRecyclerView: RecyclerView
     private var adapter: BitAdapter? = null
+
+    private val bitGramViewModel: BitGramViewModel by lazy {
+        ViewModelProviders.of(this).get(BitGramViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bitGramViewModel =
-            ViewModelProviders.of(this).get(BitGramViewModel::class.java)
+        bitGramViewModel.listDataSource()
     }
 
     override fun onCreateView(

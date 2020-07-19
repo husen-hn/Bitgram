@@ -24,6 +24,10 @@ class KucoinFetchr {
         kucoinApi = retrofit.create(KucoinApi::class.java)
     }
 
+    fun getDataSourceItem(): ArrayList<DataSourceItem?> {
+        return DataSource.getList()
+    }
+
     fun fetchBits(): LiveData<List<GramItem>> {
         val responseLiveData: MutableLiveData<List<GramItem>> = MutableLiveData()
         val kucoinRequest = kucoinApi.fetchBits()
