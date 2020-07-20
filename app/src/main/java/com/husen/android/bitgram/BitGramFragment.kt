@@ -132,11 +132,10 @@ class BitGramFragment : Fragment() {
         }
         private fun calPercent(changePrice: String, lastPrice: String,
                                tvPercent: TextView, ivPercent: ImageView): String {
-            val changePrice = changePrice.toDouble()
-            val lastPrice = lastPrice.toDouble()
-            val initialNum = lastPrice - changePrice
 
-            val percent = ((changePrice)/(initialNum))*100
+            val initialNum = lastPrice.toDouble() - changePrice.toDouble()
+
+            val percent = ((changePrice.toDouble())/(initialNum))*100
             //Round number to 0.01
             val df = DecimalFormat("#.#")
             df.roundingMode = RoundingMode.CEILING
