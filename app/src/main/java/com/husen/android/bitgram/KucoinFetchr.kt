@@ -46,8 +46,19 @@ class KucoinFetchr {
                 gramItems = gramItems.filterNot {
                     it.lastPrice.isBlank()
                 }
+                fun matchApiWithDataSource(symbol: String): Boolean {
+
+                    var bln = false
+
+                    for (dataSourceItem in DataSource.getList()){
+                        if (dataSourceItem?.bitIdSymbol == symbol)
+                            bln = true
+                    }
+                    return bln
+                }
                 gramItems = gramItems.filter {
                     it.symbol.subSequence(it.symbol.length-4, it.symbol.length) == "USDT"
+                    matchApiWithDataSource(it.symbol)
                 }
                 responseLiveData.value = gramItems
             }
