@@ -1,19 +1,25 @@
 package com.husen.android.bitgram
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 class BitGramViewModel : ViewModel() {
-    val gramItemLiveData: LiveData<List<GramItem>>
-    var dataSourceList = ArrayList<DataSourceItem?>()
 
-    init {
-        gramItemLiveData = KucoinFetchr().fetchBits()
+    var gramItemLiveData: LiveData<List<GramItem>>
+    var dataSourceList: ArrayList<DataSourceItem?>
+
+    private fun gramItemLiveData(): LiveData<List<GramItem>> {
+        return KucoinFetchr().fetchBits()
     }
 
-    fun listDataSource() {
-        dataSourceList = KucoinFetchr().getDataSourceItem()
+    private fun dataSourceList(): ArrayList<DataSourceItem?> {
+        return KucoinFetchr().getDataSourceItem()
+    }
+
+    init {
+        gramItemLiveData = gramItemLiveData()
+        dataSourceList = dataSourceList()
     }
 }

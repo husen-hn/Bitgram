@@ -16,6 +16,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -26,7 +30,7 @@ class BitGramFragment : Fragment() {
     private lateinit var bitRecyclerView: RecyclerView
     private var adapter: BitAdapter? = null
     private val bitGramViewModel: BitGramViewModel by lazy {
-        ViewModelProviders.of(this).get(BitGramViewModel::class.java)
+        ViewModelProvider(this).get(BitGramViewModel::class.java)
     }
     private lateinit var thumbnailDownloader: ThumbnailDownloader<BitHolder>
 
@@ -34,7 +38,7 @@ class BitGramFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         retainInstance = true
-        bitGramViewModel.listDataSource()
+        bitGramViewModel.dataSourceList
 
         thumbnailDownloader = ThumbnailDownloader()
         lifecycle.addObserver(thumbnailDownloader)
@@ -99,24 +103,29 @@ class BitGramFragment : Fragment() {
 
         @SuppressLint("SetTextI18n")
         fun bind(gramItem: GramItem, dataSourceList: ArrayList<DataSourceItem?>?) {
-            this.gramItem = gramItem
-            this.dataSourceList = dataSourceList
-            val gramItemSymbol = gramItem.symbol
-            dataSourceItem = findBitInDataSource(gramItemSymbol, this.dataSourceList)
 
-            bitIcon.load(dataSourceItem?.bitIconUrl)
+            CoroutineScope(Main).launch {
+                val gramItem = gramItem
+                val dataSourceList = dataSourceList
+                val gramItemSymbol = gramItem.symbol
+                dataSourceItem = findBitInDataSource(gramItemSymbol, dataSourceList)
 
-            bitName.text = this.dataSourceItem?.bitName
-            bitSymbol.text = this.dataSourceItem?.bitSymbol
-            bitFaName.text = this.dataSourceItem?.bitFaName
+                bitIcon.load(dataSourceItem?.bitIconUrl)
 
-            usaPrice.text = "${this.gramItem.lastPrice}$"
-            usaPercent.text = "${(calPercent(
-                this.gramItem.changePrice,
-                this.gramItem.lastPrice,
-                usaPercent,
-                usaPercentIcon))}%"
+                bitName.text = dataSourceItem?.bitName
+                bitSymbol.text = dataSourceItem?.bitSymbol
+                bitFaName.text = dataSourceItem?.bitFaName
+
+                usaPrice.text = "${gramItem.lastPrice}$"
+                usaPercent.text = "${(calPercent(
+                    gramItem.changePrice,
+                    gramItem.lastPrice,
+                    usaPercent,
+                    usaPercentIcon))}%"
+            }
+
         }
+        //FIXME: better searching Algorithm
         private fun findBitInDataSource(bitSymbol: String, dataSourceList: ArrayList<DataSourceItem?>?)
                 : DataSourceItem? {
 
