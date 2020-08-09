@@ -30,20 +30,12 @@ class KucoinFetchr {
     }
 
     fun getDataSourceItem(): ArrayList<DataSourceItem?> {
-
-        var dataSourceList: List<DataSourceItem?>
-
-        CoroutineScope(IO).launch {
-            dataSourceList = DataSource.getList()
-        }
-
-        return DataSource.getList()
+        return DataSource.dataSourceList
     }
 
     fun fetchBits(): LiveData<List<GramItem>> {
 
         val responseLiveData: MutableLiveData<List<GramItem>> = MutableLiveData()
-
 
         CoroutineScope(IO).launch {
             val kucoinRequest = kucoinApi.fetchBits()
@@ -69,7 +61,7 @@ class KucoinFetchr {
 
                         var bln = false
 
-                        for (dataSourceItem in DataSource.getList()) {
+                        for (dataSourceItem in DataSource.dataSourceList) {
                             if (dataSourceItem?.bitIdSymbol == symbol)
                                 bln = true
                         }
