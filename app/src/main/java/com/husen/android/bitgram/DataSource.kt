@@ -10,7 +10,7 @@ private const val TAG = "DataSource"
 class DataSource {
     companion object {
 
-        var dataSourceList = ArrayList<DataSourceItem?>()
+        var dataSourceListMap = HashMap<String, DataSourceItem>()
 
         private fun addToList(
             bitIdSymbol: String,
@@ -19,7 +19,8 @@ class DataSource {
             bitFaName: String,
             bitIconUrl: String
         ) {
-            dataSourceList.add(
+            dataSourceListMap.put(
+                bitIdSymbol,
                 DataSourceItem(
                     bitIdSymbol,
                     bitName,

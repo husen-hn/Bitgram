@@ -29,8 +29,8 @@ class KucoinFetchr {
         kucoinApi = retrofit.create(KucoinApi::class.java)
     }
 
-    fun getDataSourceItem(): ArrayList<DataSourceItem?> {
-        return DataSource.dataSourceList
+    fun getDataSourceItem(): HashMap<String, DataSourceItem> {
+        return DataSource.dataSourceListMap
     }
 
     //FIXME: fetch data is so heavy maybe parallel process in viewModel!!!
@@ -58,19 +58,9 @@ class KucoinFetchr {
                     gramItems = gramItems.filterNot {
                         it.lastPrice.isBlank()
                     }
-                    fun matchApiWithDataSource(symbol: String): Boolean {
-
-                        var bln = false
-
-                        for (dataSourceItem in DataSource.dataSourceList) {
-                            if (dataSourceItem?.bitIdSymbol == symbol)
-                                bln = true
-                        }
-                        return bln
-                    }
                     gramItems = gramItems.filter {
                         it.symbol.subSequence(it.symbol.length - 4, it.symbol.length) == "USDT"
-                        matchApiWithDataSource(it.symbol)
+                        DataSource.dataSourceListMap.containsKey(it.symbol)
                     }
                     responseLiveData.value = gramItems
                 }

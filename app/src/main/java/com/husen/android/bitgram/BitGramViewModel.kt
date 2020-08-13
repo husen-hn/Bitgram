@@ -8,13 +8,13 @@ import kotlinx.coroutines.launch
 class BitGramViewModel : ViewModel() {
 
     var gramItemLiveData: LiveData<List<GramItem>>
-    var dataSourceList: ArrayList<DataSourceItem?>
+    var dataSourceList: HashMap<String, DataSourceItem>
 
     private fun gramItemLiveData(): LiveData<List<GramItem>> {
         return KucoinFetchr().fetchBits()
     }
 
-    private fun dataSourceList(): ArrayList<DataSourceItem?> {
+    private fun dataSourceList(): HashMap<String, DataSourceItem> {
         return KucoinFetchr().getDataSourceItem()
     }
 

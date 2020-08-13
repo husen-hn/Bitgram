@@ -102,13 +102,10 @@ class BitGramFragment : Fragment() {
         private val irPercentIcon: ImageView = itemView.findViewById(R.id.iv_ir_arrow)
 
         @SuppressLint("SetTextI18n")
-        fun bind(gramItem: GramItem, dataSourceList: ArrayList<DataSourceItem?>?) {
+        fun bind(gramItem: GramItem, dataSourceList: HashMap<String, DataSourceItem>) {
 
             CoroutineScope(Main).launch {
-                val gramItem = gramItem
-                val dataSourceList = dataSourceList
-                val gramItemSymbol = gramItem.symbol
-                dataSourceItem = findBitInDataSource(gramItemSymbol, dataSourceList)
+                dataSourceItem = dataSourceList[gramItem.symbol]
 
                 bitIcon.load(dataSourceItem?.bitIconUrl)
 
@@ -123,20 +120,6 @@ class BitGramFragment : Fragment() {
                     usaPercent,
                     usaPercentIcon))}%"
             }
-
-        }
-        //FIXME: better searching Algorithm
-        private fun findBitInDataSource(bitSymbol: String, dataSourceList: ArrayList<DataSourceItem?>?)
-                : DataSourceItem? {
-
-            var dataSourceItem: DataSourceItem? = null
-
-            for (item in dataSourceList!!) {
-                    if (item?.bitIdSymbol == bitSymbol) {
-                        dataSourceItem = item
-                }
-            }
-            return dataSourceItem
 
         }
         private fun calPercent(changePrice: String, lastPrice: String,
@@ -167,7 +150,7 @@ class BitGramFragment : Fragment() {
     }
 
     private inner class BitAdapter(private val gramItems: List<GramItem>,
-                                   var dataSourceList: ArrayList<DataSourceItem?>)
+                                   var dataSourceList: HashMap<String, DataSourceItem>)
         : RecyclerView.Adapter<BitHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BitHolder {
             val view
