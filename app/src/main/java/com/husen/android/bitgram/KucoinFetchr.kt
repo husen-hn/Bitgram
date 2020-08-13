@@ -33,6 +33,7 @@ class KucoinFetchr {
         return DataSource.dataSourceList
     }
 
+    //FIXME: fetch data is so heavy maybe parallel process in viewModel!!!
     fun fetchBits(): LiveData<List<GramItem>> {
 
         val responseLiveData: MutableLiveData<List<GramItem>> = MutableLiveData()
@@ -49,7 +50,7 @@ class KucoinFetchr {
                     call: Call<KucoinResponse>,
                     response: Response<KucoinResponse>
                 ) {
-                    Log.d(TAG, "Response received")
+                    Log.d("XXXX", "Response received")
                     val kucoinResponse = response.body()
                     val bitResponse = kucoinResponse?.bits
                     var gramItems = bitResponse?.gramItems
