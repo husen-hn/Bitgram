@@ -163,7 +163,10 @@ class BitGramFragment : Fragment() {
 
         override fun onBindViewHolder(holder: BitHolder, position: Int) {
             val gramItem = gramItems[position]
+
+            //Invisible loading animation
             anim_recycler_loading.visibility = View.INVISIBLE
+            // Visible recyclerview
             bit_recycler_view.visibility = View.VISIBLE
             holder.bind(gramItem, dataSourceList)
 //            thumbnailDownloader.queueThumbnail(holder, gramItem.symbol,

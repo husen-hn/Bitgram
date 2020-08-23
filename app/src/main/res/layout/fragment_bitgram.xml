@@ -8,9 +8,10 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/anim_recycler_loading"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        app:lottie_speed="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/bit_recycler_view"
         app:layout_constraintStart_toStartOf="@+id/bit_recycler_view"
@@ -24,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
+        android:layoutAnimation="@anim/item_layout_animation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
