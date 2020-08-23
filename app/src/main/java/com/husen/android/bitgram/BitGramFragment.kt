@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import kotlinx.android.synthetic.main.fragment_bitgram.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -162,6 +163,8 @@ class BitGramFragment : Fragment() {
 
         override fun onBindViewHolder(holder: BitHolder, position: Int) {
             val gramItem = gramItems[position]
+            anim_recycler_loading.visibility = View.INVISIBLE
+            bit_recycler_view.visibility = View.VISIBLE
             holder.bind(gramItem, dataSourceList)
 //            thumbnailDownloader.queueThumbnail(holder, gramItem.symbol,
 //                gramItem.changePrice,
