@@ -1,8 +1,23 @@
 <resources>
     <string name="app_name">Bitgram</string>
+    <string name="app_name_persian">بیتگرام</string>
     <string name="coin_icon">Coin Icon</string>
     <string name="usa_arrorw">usa arrorw</string>
     <string name="ir_arrow">ir arrow</string>
     <string name="usa_flag">usa flag</string>
     <string name="ir_flag">ir flag</string>
+    <string name="open_drawer">Open navigation drawer</string>
+    <string name="close_drawer">Close navigation drawer</string>
+    <string name="bitgram_icon">bitgram icon</string>
+    <string name="cryptocoin_trading_tool_app">Cryptocoin trading tool app</string>
+    <string name="description">قیمت و اطلاعات بروز ارزهای دیجیتال</string>
+    <string name="bitgram">Bitgram</string>
+    <string name="familiarity">آشنایی با نرم افزار</string>
+    <string name="suggestion">پیشنهاد و انتقاد</string>
+    <string name="privacy">حریم خصوصی</string>
+    <string name="about">درباره ما</string>
+    <string name="star">به ما امتیاز بدهید!</string>
+    <string name="share">پیشنهاد به دوستان</string>
+    <string name="changes">تغییرات اخیر</string>
+    <string name="version">بیتگرام نسخه ۱.۰.۰</string>
 </resources>
