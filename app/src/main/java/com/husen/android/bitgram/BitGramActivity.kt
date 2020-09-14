@@ -2,22 +2,30 @@ package com.husen.android.bitgram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import com.husen.android.bitgram.NavigationDrawerItems.SuggestionFragment
 import kotlinx.android.synthetic.main.navigation_drawer.*
 
 class BitGramActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private val bitGramViewModel: BitGramViewModel by lazy {
+        ViewModelProvider(this).get(BitGramViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navigation_drawer)
@@ -90,9 +98,39 @@ class BitGramActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.search_ic -> Toast.makeText(applicationContext, "search", Toast.LENGTH_SHORT).show()
+            R.id.search_id -> object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    filterList(p0.toString())
+                }
+            }
         }
         return false
+    }
+
+    private fun filterList(filterItem: String) {
+
+        val dataSourceList = bitGramViewModel.dataSourceList
+
+//        val kucoinItemList = bitGramViewModel.gramItemLiveData.observe(
+//            viewLifecycleOwner,
+//            Observer { gramItem ->
+//
+//            })
+//
+//        for (d in dataSourceList){
+//            if (filterItem in d.bitIdSymbol) {
+//
+//            }
+//        }
+//        BitGramFragment.newInstance().updateList()
     }
 
     private fun replaceFragment(fragment: Fragment) {

@@ -179,6 +179,11 @@ class BitGramFragment : Fragment() {
         }
     }
 
+    // update recycler view after searching
+    fun updateList(gramItems: List<GramItem>, dataSourceList: HashMap<String, DataSourceItem>) {
+        BitAdapter(gramItems, dataSourceList)
+    }
+
     companion object {
         fun newInstance() = BitGramFragment()
     }
