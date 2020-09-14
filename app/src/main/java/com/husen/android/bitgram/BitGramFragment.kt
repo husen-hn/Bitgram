@@ -2,23 +2,21 @@ package com.husen.android.bitgram
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import kotlinx.android.synthetic.main.fragment_bitgram.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import java.math.RoundingMode
@@ -119,12 +117,15 @@ class BitGramFragment : Fragment() {
                     gramItem.changePrice,
                     gramItem.lastPrice,
                     usaPercent,
-                    usaPercentIcon))}%"
+                    usaPercentIcon
+                ))}%"
             }
 
         }
-        private fun calPercent(changePrice: String, lastPrice: String,
-                               tvPercent: TextView, ivPercent: ImageView): String {
+        private fun calPercent(
+            changePrice: String, lastPrice: String,
+            tvPercent: TextView, ivPercent: ImageView
+        ): String {
 
             val initialNum = lastPrice.toDouble() - changePrice.toDouble()
 
@@ -138,8 +139,10 @@ class BitGramFragment : Fragment() {
 
             return RoundPercent
         }
-        private fun changePercentColorAndIcon(percent: Double, tvPercent: TextView,
-                                              ivPercent: ImageView) {
+        private fun changePercentColorAndIcon(
+            percent: Double, tvPercent: TextView,
+            ivPercent: ImageView
+        ) {
             if (percent >= 0) {
                 tvPercent.setTextColor(resources.getColor(R.color.Green))
                 ivPercent.load(R.drawable.up)
@@ -150,12 +153,13 @@ class BitGramFragment : Fragment() {
         }
     }
 
-    private inner class BitAdapter(private val gramItems: List<GramItem>,
-                                   var dataSourceList: HashMap<String, DataSourceItem>)
+    private inner class BitAdapter(
+        private val gramItems: List<GramItem>,
+        var dataSourceList: HashMap<String, DataSourceItem>
+    )
         : RecyclerView.Adapter<BitHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BitHolder {
-            val view
-                    = layoutInflater.inflate(R.layout.bit_list_card_view, parent, false)
+            val view = layoutInflater.inflate(R.layout.bit_list_card_view, parent, false)
             return BitHolder(view)
         }
 
