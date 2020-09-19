@@ -82,7 +82,6 @@ class BitGramActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
             R.id.privacy_id -> {Log.d("XXXX", "privacy_id")}
             R.id.about_id -> {Log.d("XXXX", "about_id")}
-            R.id.star_id -> {Log.d("XXXX", "star_id")}
             R.id.share_id -> {Log.d("XXXX", "share_id")}
             R.id.changes_id -> {Log.d("XXXX", "changes_id")}
         }
@@ -117,7 +116,7 @@ class BitGramActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     private fun filterList(filterItem: String) {
 
-        val dataSourceList = bitGramViewModel.dataSourceList
+//        val dataSourceList = bitGramViewModel.dataSourceList
 
 //        val kucoinItemList = bitGramViewModel.gramItemLiveData.observe(
 //            viewLifecycleOwner,

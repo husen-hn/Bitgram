@@ -20,10 +20,6 @@
             android:icon="@drawable/about"
             android:id="@+id/about_id"/>
         <item
-            android:title="@string/star"
-            android:icon="@drawable/star"
-            android:id="@+id/star_id"/>
-        <item
             android:title="@string/share"
             android:icon="@drawable/share"
             android:id="@+id/share_id"/>
