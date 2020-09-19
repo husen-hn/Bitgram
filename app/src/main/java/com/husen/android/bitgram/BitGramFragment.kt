@@ -2,7 +2,6 @@ package com.husen.android.bitgram
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +37,7 @@ class BitGramFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         retainInstance = true
+        bitGramViewModel.dataSourceList
 
         thumbnailDownloader = ThumbnailDownloader()
         lifecycle.addObserver(thumbnailDownloader)
@@ -61,10 +61,12 @@ class BitGramFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val dataSourceList = bitGramViewModel.dataSourceList
+
         bitGramViewModel.gramItemLiveData.observe(
             viewLifecycleOwner,
             Observer { gramItem ->
-                bitRecyclerView.adapter = BitAdapter(gramItem)
+                bitRecyclerView.adapter = BitAdapter(gramItem, dataSourceList)
             })
     }
 
@@ -99,20 +101,43 @@ class BitGramFragment : Fragment() {
         private val irPercentIcon: ImageView = itemView.findViewById(R.id.iv_ir_arrow)
 
         @SuppressLint("SetTextI18n")
-        fun bind(gramItem: BitGramItem) {
+        fun bind(gramItem: GramItem, dataSourceList: HashMap<String, DataSourceItem>) {
 
             CoroutineScope(Main).launch {
+                dataSourceItem = dataSourceList[gramItem.symbol]
 
-                bitIcon.load(gramItem.bitLogoURL)
+                bitIcon.load(dataSourceItem?.bitIconUrl)
 
-                bitName.text = gramItem.bitName
-                bitSymbol.text = gramItem.bitSymbol
-                bitFaName.text = gramItem.bitFaName
+                bitName.text = dataSourceItem?.bitName
+                bitSymbol.text = dataSourceItem?.bitSymbol
+                bitFaName.text = dataSourceItem?.bitFaName
 
-                usaPrice.text = "${gramItem.usaPrice}$"
-                usaPercent.text = "${gramItem.usaPercent}%"
-                changePercentColorAndIcon((gramItem.usaPercent).toDouble(), usaPercent, usaPercentIcon)
+                usaPrice.text = "${gramItem.lastPrice}$"
+                usaPercent.text = "${(calPercent(
+                    gramItem.changePrice,
+                    gramItem.lastPrice,
+                    usaPercent,
+                    usaPercentIcon
+                ))}%"
             }
+
+        }
+        private fun calPercent(
+            changePrice: String, lastPrice: String,
+            tvPercent: TextView, ivPercent: ImageView
+        ): String {
+
+            val initialNum = lastPrice.toDouble() - changePrice.toDouble()
+
+            val percent = ((changePrice.toDouble())/(initialNum))*100
+            //Round number to 0.01
+            val df = DecimalFormat("#.#")
+            df.roundingMode = RoundingMode.CEILING
+            val RoundPercent = df.format(percent)
+
+            changePercentColorAndIcon(percent, tvPercent, ivPercent)
+
+            return RoundPercent
         }
         private fun changePercentColorAndIcon(
             percent: Double, tvPercent: TextView,
@@ -129,7 +154,8 @@ class BitGramFragment : Fragment() {
     }
 
     private inner class BitAdapter(
-        private val gramItems: List<BitGramItem>
+        private val gramItems: List<GramItem>,
+        var dataSourceList: HashMap<String, DataSourceItem>
     )
         : RecyclerView.Adapter<BitHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BitHolder {
@@ -146,8 +172,7 @@ class BitGramFragment : Fragment() {
             anim_recycler_loading.visibility = View.INVISIBLE
             // Visible recyclerview
             bit_recycler_view.visibility = View.VISIBLE
-            Log.e(TAG, "Adapter onBindViewHolder: ${gramItems.size}")
-            holder.bind(gramItem)
+            holder.bind(gramItem, dataSourceList)
 //            thumbnailDownloader.queueThumbnail(holder, gramItem.symbol,
 //                gramItem.changePrice,
 //                gramItem.lastPrice)
@@ -155,9 +180,9 @@ class BitGramFragment : Fragment() {
     }
 
     // update recycler view after searching
-//    fun updateList(gramItems: List<GramItem>, dataSourceList: HashMap<String, DataSourceItem>) {
-//        BitAdapter(gramItems, dataSourceList)
-//    }
+    fun updateList(gramItems: List<GramItem>, dataSourceList: HashMap<String, DataSourceItem>) {
+        BitAdapter(gramItems, dataSourceList)
+    }
 
     companion object {
         fun newInstance() = BitGramFragment()
