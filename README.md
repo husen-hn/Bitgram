@@ -16,11 +16,11 @@ This project implemented in [Persian language](https://en.wikipedia.org/wiki/Per
 
 //TODO preview images
 
-## Contribute ⚡
+## Contribute ⛬
 Want to contribute? I would really appreciate a hand with the development to add more features in this app.
 Feel free to Fork, edit, then pull!
 
-## Download ☉
+## Download ߜ
 [<img src="preview/direct-apk-download.png" alt="Direct apk download"  height="80">](https://github.com/husen-hn/Bitgram/releases/latest)
 
 ## License ©
