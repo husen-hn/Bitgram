@@ -4,10 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.husen.android.bitgram.api.KucoinApi
+import com.husen.android.bitgram.api.RamzinexApi
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,16 +18,24 @@ import java.text.DecimalFormat
 
 private const val TAG = "KucoinFetchr"
 
-class KucoinFetchr {
+class ApiFetchr {
     private val kucoinApi: KucoinApi
+    private val ramzinexApi: RamzinexApi
 
     init {
-        val retrofit = Retrofit.Builder()
+        val kucoinRetrofit = Retrofit.Builder()
             .baseUrl("https://api.kucoin.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        kucoinApi = retrofit.create(KucoinApi::class.java)
+        kucoinApi = kucoinRetrofit.create(KucoinApi::class.java)
+
+        val ramzinexRetrofit = Retrofit.Builder()
+            .baseUrl("https://ramzinex.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        ramzinexApi = ramzinexRetrofit.create(RamzinexApi::class.java)
     }
 
     private fun getDataSourceItem(): HashMap<String, DataSourceItem> {
@@ -36,7 +43,7 @@ class KucoinFetchr {
     }
 
     //FIXME: fetch data is so heavy maybe parallel process in viewModel!!!
-    fun fetchBits(): LiveData<List<BitGramItem>> {
+    fun fetchKucoinBits(): LiveData<List<BitGramItem>> {
 
         val responseLiveData: MutableLiveData<List<BitGramItem>> = MutableLiveData()
 
@@ -74,9 +81,39 @@ class KucoinFetchr {
         return responseLiveData
     }
 
+    fun fetchRamzinexBits(): LiveData<RamzinexItem> {
+
+        val responseLiveData: MutableLiveData<RamzinexItem> = MutableLiveData()
+
+        CoroutineScope(IO).launch {
+            val ramzinexRequest = ramzinexApi.fetchBits()
+
+            ramzinexRequest.enqueue(object : Callback<RamzinexResponse> {
+                override fun onFailure(call: Call<RamzinexResponse>, t: Throwable) {
+                    Log.e(TAG, "Failed to fetch Ramzinex Bits", t)
+                }
+
+                override fun onResponse(
+                    call: Call<RamzinexResponse>,
+                    response: Response<RamzinexResponse>
+                ) {
+                    Log.d(TAG, "Ramzinex: Response received")
+                    val ramzinexResponse = response.body()
+                    val bitResponse = ramzinexResponse?.bits
+                    val usdt = bitResponse?.usdt
+                    val finance = usdt?.financialData
+                    val lastData = finance?.lastData
+
+                    responseLiveData.value = lastData
+                }
+            })
+        }
+        return responseLiveData
+    }
+
     //collect local and api data
     private fun collectData(dataSourceList: HashMap<String, DataSourceItem>,
-                            fetchBits: List<GramItem>): List<BitGramItem> {
+                            fetchBits: List<KucoinItem>): List<BitGramItem> {
 
         val list: MutableList<BitGramItem> = mutableListOf()
 

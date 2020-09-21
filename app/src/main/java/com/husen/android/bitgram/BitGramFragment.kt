@@ -6,8 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -20,8 +18,6 @@ import kotlinx.android.synthetic.main.fragment_bitgram.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 private const val TAG = "BitgramFragment"
 
@@ -64,7 +60,7 @@ class BitGramFragment : Fragment() {
         bitGramViewModel.gramItemLiveData.observe(
             viewLifecycleOwner,
             Observer { gramItem ->
-                bitRecyclerView.adapter = BitAdapter(gramItem)
+//                bitRecyclerView.adapter = BitAdapter(gramItem)
             })
     }
 
@@ -78,7 +74,7 @@ class BitGramFragment : Fragment() {
     private inner class BitHolder(view: View)
         : RecyclerView.ViewHolder(view) {
 
-        private lateinit var gramItem: GramItem
+        private lateinit var gramItem: KucoinItem
         private var dataSourceList: ArrayList<DataSourceItem?>? = null
         private var dataSourceItem: DataSourceItem? = null
 

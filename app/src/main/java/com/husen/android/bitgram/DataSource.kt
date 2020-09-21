@@ -38,21 +38,22 @@ class DataSource {
                     "XLM-USDT", "XRP-USDT", "TRX-USDT", "KCS-USDT", "LUNA-USDT", "ATOM-USDT",
                     "BSV-USDT", "XTZ-USDT", "ADA-USDT", "SENSO-USDT", "BCHABC-USDT", "VET-USDT",
                     "SUTER-USDT", "ZEC-USDT", "POL-USDT", "DASH-USDT", "ONT-USDT", "DGB-USDT",
-                    "CRO-USDT", "NEO-USDT", "XEM-USDT" )
+                    "CRO-USDT", "NEO-USDT", "XEM-USDT", "USDT-USDT" )
                 val bitNameList = listOf(
                     "Bitcoin", "Ethereum", "Litecoin", "Ethereum Classic", "Binance Coin", "Eos",
                     "Stellar", "Ripple", "Tron", "KuCoin Shares", "Terra", "Cosmos", "Bitcoin SV",
                     "Tezos", "Cardano", "Sensorium", "Bitcoin ABC", "VeChain", "suterusu",
-                    "Zcash", "POL", "Dash", "Ontology", "DigiByte", "Crypto.com Coin", "Neo", "NEM")
+                    "Zcash", "POL", "Dash", "Ontology", "DigiByte", "Crypto.com Coin", "Neo", "NEM",
+                    "Tether")
                 val bitSymbol = listOf(
                     "BTC", "ETH", "LTC", "ETC", "BNB", "EOS", "XLM", "XRP", "TRX", "KCS", "LUNA",
                     "ATOM", "BSV", "XTZ", "ADA", "SENSO", "BCHABC", "VET", "SUTER", "ZEC", "Mining POL",
-                    "DASH", "ONT", "DGB", "CRO", "NEO", "XEM")
+                    "DASH", "ONT", "DGB", "CRO", "NEO", "XEM", "USDT")
                 val bitFaName = listOf(
                     "بیتکوین", "اتریوم", "لایت کوین", "اتریوم کلاسیک", "بایننس کوین", "ایاس", "استلار",
                     "ریپل", "ترون", "کوکوین شیرز", "ترا", "کاسموس", "بیتکوین اس وی", "تزوس", "کاردانو",
                     "سنسوریوم", "بیتکوین کش ای بی سی", "وچین", "ستیروسو", "زی کش", "پل", "دش", "آنتلوجی"
-                    , "دیجی بایت", "کوین Crypto.com", "نئو", "نم")
+                    , "دیجی بایت", "کوین Crypto.com", "نئو", "نم", "تتر")
                 val bitIconUrl = listOf(
                     setIconUrl(bitSymbol[0]), setIconUrl(bitSymbol[1]), setIconUrl(bitSymbol[2]) ,
                     setIconUrl(bitSymbol[3]), setIconUrl(bitSymbol[4]), setIconUrl(bitSymbol[5]) ,
@@ -67,7 +68,8 @@ class DataSource {
                     "https://assets-currency.kucoin.com/5e903e3ff816040008d3c572_POL_token11111.png", setIconUrl(bitSymbol[21]),
                     setIconUrl(bitSymbol[22]), setIconUrl(bitSymbol[23]), "https://assets-currency.kucoin.com/5cb08e9238300c4320a45e5a_Crypto.com%20Chain_token.png",
                     "https://assets-currency.kucoin.com/5e2128172c0a950008b9b5ef_NEO-token-logo-.png",
-                    "https://assets-currency.kucoin.com/5d11efc8134ab772a9abdb39_Nem-Logo-Transparent-Border-.png"
+                    "https://assets-currency.kucoin.com/5d11efc8134ab772a9abdb39_Nem-Logo-Transparent-Border-.png",
+                    "https://ramzinex.com/exchange/img/coins/usdt.png"
                 )
 
                 for (index in bitIdSymbol.indices) {
