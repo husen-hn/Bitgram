@@ -57,7 +57,7 @@ class BitGramFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bitGramViewModel.gramItemLiveData.observe(
+        bitGramViewModel.bitGramItemsLiveData.observe(
             viewLifecycleOwner,
             Observer { gramItem ->
 //                bitRecyclerView.adapter = BitAdapter(gramItem)

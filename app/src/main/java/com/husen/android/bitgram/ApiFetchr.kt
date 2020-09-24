@@ -1,6 +1,7 @@
 package com.husen.android.bitgram
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.husen.android.bitgram.api.KucoinApi
@@ -21,6 +22,9 @@ private const val TAG = "KucoinFetchr"
 class ApiFetchr {
     private val kucoinApi: KucoinApi
     private val ramzinexApi: RamzinexApi
+    private val dataSource: HashMap<String, DataSourceItem>
+    private val kuCoinBits: List<KucoinItem>
+    private val ramzinexBit: List<RamzinexItem>
 
     init {
         val kucoinRetrofit = Retrofit.Builder()
@@ -36,23 +40,34 @@ class ApiFetchr {
             .build()
 
         ramzinexApi = ramzinexRetrofit.create(RamzinexApi::class.java)
+
+        dataSource = getDataSourceItem()
+        kuCoinBits = fetchKuCoinBits()
+        ramzinexBit = fetchRamzinexBit()
     }
 
+    fun fetchCollectedData(): LiveData<List<BitGramItem>> {
+        Log.e(TAG, "fetchCollectedData : $kuCoinBits \n $ramzinexBit")
+        return collectData(dataSource, kuCoinBits, ramzinexBit)
+    }
+
+    // fetch local bits info
     private fun getDataSourceItem(): HashMap<String, DataSourceItem> {
         return DataSource.dataSourceListMap
     }
 
-    //FIXME: fetch data is so heavy maybe parallel process in viewModel!!!
-    fun fetchKucoinBits(): LiveData<List<BitGramItem>> {
+    // fetch KuCoin Bits
+    private fun fetchKuCoinBits(): List<KucoinItem> {
 
-        val responseLiveData: MutableLiveData<List<BitGramItem>> = MutableLiveData()
+        var kuCoinBits: List<KucoinItem> = emptyList()
 
         CoroutineScope(IO).launch {
             val kucoinRequest = kucoinApi.fetchBits()
 
+            //fetch All bits from KuCoin
             kucoinRequest.enqueue(object : Callback<KucoinResponse> {
                 override fun onFailure(call: Call<KucoinResponse>, t: Throwable) {
-                    Log.e(TAG, "Failed to fetch Bits", t)
+                    Log.e(TAG, "Failed to fetch KuCoin Bits", t)
                 }
 
                 override fun onResponse(
@@ -62,35 +77,34 @@ class ApiFetchr {
                     Log.d(TAG, "Response received")
                     val kucoinResponse = response.body()
                     val bitResponse = kucoinResponse?.bits
-                    var gramItems = bitResponse?.gramItems
+                    kuCoinBits = bitResponse?.gramItems
                         ?: mutableListOf()
-                    gramItems = gramItems.filterNot {
+                    kuCoinBits = kuCoinBits.filterNot {
                         it.lastPrice.isBlank()
                     }
-                    gramItems = gramItems.filter {
+                    kuCoinBits = kuCoinBits.filter {
                         it.symbol.subSequence(it.symbol.length - 4, it.symbol.length) == "USDT"
-                        DataSource.dataSourceListMap.containsKey(it.symbol)
+                        dataSource.containsKey(it.symbol)
                     }
-                    val collectedData = collectData(getDataSourceItem(), gramItems)
-                    responseLiveData.value = collectedData
-                    Log.e(TAG, "${responseLiveData.value}")
                 }
             })
         }
-        Log.e(TAG, "${responseLiveData.value}")
-        return responseLiveData
+        Log.e(TAG, "fetchKuCoinBits: $kuCoinBits")
+        return kuCoinBits
     }
 
-    fun fetchRamzinexBits(): LiveData<RamzinexItem> {
+    // fetch Ramzinex Bit (USDT)
+    private fun fetchRamzinexBit(): List<RamzinexItem> {
 
-        val responseLiveData: MutableLiveData<RamzinexItem> = MutableLiveData()
+        var ramzinexBit: List<RamzinexItem> = emptyList()
 
         CoroutineScope(IO).launch {
             val ramzinexRequest = ramzinexApi.fetchBits()
 
+            // only fetch USDT info from Ramzinex
             ramzinexRequest.enqueue(object : Callback<RamzinexResponse> {
                 override fun onFailure(call: Call<RamzinexResponse>, t: Throwable) {
-                    Log.e(TAG, "Failed to fetch Ramzinex Bits", t)
+                    Log.e(TAG, "Failed to fetch Ramzinex Bit", t)
                 }
 
                 override fun onResponse(
@@ -102,22 +116,32 @@ class ApiFetchr {
                     val bitResponse = ramzinexResponse?.bits
                     val usdt = bitResponse?.usdt
                     val finance = usdt?.financialData
-                    val lastData = finance?.lastData
-
-                    responseLiveData.value = lastData
+                    ramzinexBit = listOf(finance!!.lastData)
+                        ?: mutableListOf()
+                    ramzinexBit = ramzinexBit.filterNot {
+                        it.lastPrice.isBlank()
+                    }
+                    ramzinexBit = ramzinexBit.filter {
+                        dataSource.containsKey(it.symbol)
+                    }
+                    Log.e(TAG, "fetchRamzinexBit 1 $ramzinexBit")
                 }
             })
         }
-        return responseLiveData
+        Log.e(TAG, "fetchRamzinexBit 2 $ramzinexBit")
+        return ramzinexBit
     }
 
     //collect local and api data
     private fun collectData(dataSourceList: HashMap<String, DataSourceItem>,
-                            fetchBits: List<KucoinItem>): List<BitGramItem> {
+                            kuCoinBits: List<KucoinItem>,
+                            ramzinexBits: List<RamzinexItem>)
+            : LiveData<List<BitGramItem>> {
 
+        val LiveListData: MutableLiveData<List<BitGramItem>> = MutableLiveData()
         val list: MutableList<BitGramItem> = mutableListOf()
 
-        for (gramItem in fetchBits) {
+        for (gramItem in kuCoinBits) {
             val dataSourceItem = dataSourceList[gramItem.symbol]
 
             val bitLogoURL = dataSourceItem?.bitIconUrl
@@ -133,16 +157,26 @@ class ApiFetchr {
                     gramItem.lastPrice
                 ))
             }%"
+
+            val usdt = ramzinexBits[0].lastPrice
+            val irPrice = (usaPrice.toInt() * usdt.toInt()).toString()
+            val irPercent = ramzinexBits[0].changePercent
+
             list.add(BitGramItem(
                 bitLogoURL!!,
                 bitName!!,
                 bitSymbol!!,
                 bitFaName!!,
                 usaPrice,
-                usaPercent
+                usaPercent,
+                irPrice,
+                irPercent
             ))
         }
-        return list
+        // TODO rial to toman & add usdt to list & set percent correctly
+        Log.e(TAG, "collectData: $list")
+        LiveListData.value = list
+        return LiveListData
     }
     private fun calPercent(changePrice: String, lastPrice: String): String {
 

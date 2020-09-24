@@ -4,13 +4,13 @@ import androidx.lifecycle.*
 
 class BitGramViewModel : ViewModel() {
 
-    var gramItemLiveData: LiveData<List<BitGramItem>>
+    var bitGramItemsLiveData: LiveData<List<BitGramItem>>
 
-    private fun gramItemLiveData(): LiveData<List<BitGramItem>> {
-        return ApiFetchr().fetchKucoinBits()
+    private fun bitGramItemsLiveData(): LiveData<List<BitGramItem>> {
+        return ApiFetchr().fetchCollectedData()
     }
 
     init {
-        gramItemLiveData = gramItemLiveData()
+        bitGramItemsLiveData = bitGramItemsLiveData()
     }
 }

@@ -81,7 +81,7 @@ class DataSource {
                         bitIconUrl[index]
                     )
                 }
-                Log.d("XXXX", "set DataSource")
+                Log.d(TAG, "set DataSource")
             }
         }
         private fun setIconUrl(element: String): String {
