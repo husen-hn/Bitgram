@@ -7,7 +7,7 @@ class BitGramViewModel : ViewModel() {
     var bitGramItemsLiveData: LiveData<List<BitGramItem>>
 
     private fun bitGramItemsLiveData(): LiveData<List<BitGramItem>> {
-        return ApiFetchr().fetchCollectedData()
+        return ApiFetchr().fetchCollectedData1()
     }
 
     init {
