@@ -59,8 +59,8 @@ class BitGramFragment : Fragment() {
 
         bitGramViewModel.bitGramItemsLiveData.observe(
             viewLifecycleOwner,
-            Observer { gramItem ->
-//                bitRecyclerView.adapter = BitAdapter(gramItem)
+            Observer { bitGramItem ->
+                bitRecyclerView.adapter = BitAdapter(bitGramItem)
             })
     }
 
@@ -73,10 +73,6 @@ class BitGramFragment : Fragment() {
 
     private inner class BitHolder(view: View)
         : RecyclerView.ViewHolder(view) {
-
-        private lateinit var gramItem: KucoinItem
-        private var dataSourceList: ArrayList<DataSourceItem?>? = null
-        private var dataSourceItem: DataSourceItem? = null
 
         // Coin Icon & Name & Symbol
         private val bitIcon: ImageView = itemView.findViewById(R.id.iv_bit_list)
@@ -95,37 +91,46 @@ class BitGramFragment : Fragment() {
         private val irPercentIcon: ImageView = itemView.findViewById(R.id.iv_ir_arrow)
 
         @SuppressLint("SetTextI18n")
-        fun bind(gramItem: BitGramItem) {
+        fun bind(bitGramItem: BitGramItem) {
 
             CoroutineScope(Main).launch {
 
-                bitIcon.load(gramItem.bitLogoURL)
+                bitIcon.load(bitGramItem.bitLogoURL)
 
-                bitName.text = gramItem.bitName
-                bitSymbol.text = gramItem.bitSymbol
-                bitFaName.text = gramItem.bitFaName
+                bitName.text = bitGramItem.bitName
+                bitSymbol.text = bitGramItem.bitSymbol
+                bitFaName.text = bitGramItem.bitFaName
 
-                usaPrice.text = "${gramItem.usaPrice}$"
-                usaPercent.text = "${gramItem.usaPercent}%"
-                changePercentColorAndIcon((gramItem.usaPercent).toDouble(), usaPercent, usaPercentIcon)
+                usaPrice.text = "${bitGramItem.usaPrice} $"
+                usaPercent.text = "${bitGramItem.usaPercent}%"
+                changePercentColorAndIcon(bitGramItem.usaPercent, usaPercent, usaPercentIcon)
+
+                irPrice.text = "${bitGramItem.irPrice} تومان"
+                irPercent.text = "${bitGramItem.irPercent}%"
+                changePercentColorAndIcon(bitGramItem.irPercent, irPercent, irPercentIcon)
             }
         }
         private fun changePercentColorAndIcon(
-            percent: Double, tvPercent: TextView,
+            percent: String,
+            tvPercent: TextView,
             ivPercent: ImageView
         ) {
-            if (percent >= 0) {
-                tvPercent.setTextColor(resources.getColor(R.color.Green))
-                ivPercent.load(R.drawable.up)
-            } else if( percent < 0) {
-                tvPercent.setTextColor(resources.getColor(R.color.darkerRed))
-                ivPercent.load(R.drawable.down)
+            val percent = percent.toDouble()
+            when{
+                percent >= 0.0 -> {
+                    tvPercent.setTextColor(resources.getColor(R.color.Green))
+                    ivPercent.load(R.drawable.up)
+                }
+                percent < 0.0 -> {
+                    tvPercent.setTextColor(resources.getColor(R.color.darkerRed))
+                    ivPercent.load(R.drawable.down)
+                }
             }
         }
     }
 
     private inner class BitAdapter(
-        private val gramItems: List<BitGramItem>
+        private val bitGramItems: List<BitGramItem>
     )
         : RecyclerView.Adapter<BitHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BitHolder {
@@ -133,17 +138,16 @@ class BitGramFragment : Fragment() {
             return BitHolder(view)
         }
 
-        override fun getItemCount(): Int = gramItems.size
+        override fun getItemCount(): Int = bitGramItems.size
 
         override fun onBindViewHolder(holder: BitHolder, position: Int) {
-            val gramItem = gramItems[position]
+            val bitGramItem = bitGramItems[position]
 
             //Invisible loading animation
             anim_recycler_loading.visibility = View.INVISIBLE
             // Visible recyclerview
             bit_recycler_view.visibility = View.VISIBLE
-            Log.e(TAG, "Adapter onBindViewHolder: ${gramItems.size}")
-            holder.bind(gramItem)
+            holder.bind(bitGramItem)
 //            thumbnailDownloader.queueThumbnail(holder, gramItem.symbol,
 //                gramItem.changePrice,
 //                gramItem.lastPrice)
