@@ -56,15 +56,22 @@ class BitGramViewModel : ViewModel() {
                 val bitSymbol = dataSourceItem?.bitSymbol
                 val bitFaName = dataSourceItem?.bitFaName
 
-                val usaPrice = gramItem.lastPrice
+                val usaPrice = setCommas(gramItem.lastPrice)
                 val usaPercent = calPercent(
                         gramItem.changePrice,
                         gramItem.lastPrice )
 
                 val usdt = ramzinexList[0].lastPrice
-                val irPrice = (usaPrice.toFloat() * usdt.toFloat()).toString()
-                val irPercent = ramzinexList[0].changePercent
-                //TODO rial to toman
+                val irPrice = setCommas(
+                    rialToToman((gramItem.lastPrice.toBigDecimal() * usdt.toBigDecimal()).toString())
+                )
+                val changePrice = calIrPriceChanges(
+                    rialToToman(ramzinexList[0].lastPrice),
+                    ramzinexList[0].changePercent)
+                val irPercent = calPercent(
+                    changePrice,
+                    ramzinexList[0].lastPrice
+                )
                 list.add(
                     BitGramItem(
                         bitLogoURL!!,
@@ -80,6 +87,45 @@ class BitGramViewModel : ViewModel() {
             }
         }
         return list
+    }
+    private fun rialToToman(rial: String): String{
+        val bigDecimalRial = rial.toBigDecimal()
+        val roundedRial = "%.0f".format(bigDecimalRial)
+        val arrayRial = arrayListOf<String>()
+
+        for (i in roundedRial)
+            arrayRial.add(i.toString())
+
+        arrayRial.removeAt(arrayRial.size-1)
+
+        var string = ""
+        for (i in arrayRial) {
+            string += i
+        }
+        return string
+    }
+    //set commas like 12,345,324
+    private fun setCommas(price: String): String {
+
+        var priceWithComma = price
+        if (priceWithComma.toDouble() > 999) {//don't accept ###.#### nums
+            val df = DecimalFormat("#,###,###,###,###")
+            priceWithComma = df.format(priceWithComma.toDouble())
+        }
+        return priceWithComma
+    }
+    //calculate changed price of the toman with percent
+    private fun calIrPriceChanges(lastPrice: String, percent: String): String {
+        var changedPrice = (lastPrice.toFloat() * percent.toFloat()) / 100
+        when{
+            changedPrice > 0 -> {
+                changedPrice += lastPrice.toFloat()
+            }
+            changedPrice < 0 -> {
+                changedPrice -= lastPrice.toFloat()
+            }
+        }
+        return changedPrice.toString()
     }
     private fun calPercent(changePrice: String, lastPrice: String): String {
 
