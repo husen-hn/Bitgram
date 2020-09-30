@@ -2,7 +2,6 @@ package com.husen.android.bitgram
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,8 +17,6 @@ import kotlinx.android.synthetic.main.fragment_bitgram.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 private const val TAG = "BitgramFragment"
 
@@ -157,11 +154,6 @@ class BitGramFragment : Fragment() {
 //                gramItem.lastPrice)
         }
     }
-
-    // update recycler view after searching
-//    fun updateList(gramItems: List<BitGramItem>, dataSourceList: HashMap<String, DataSourceItem>) {
-//        BitAdapter(gramItems, dataSourceList)
-//    }
 
     companion object {
         fun newInstance() = BitGramFragment()
