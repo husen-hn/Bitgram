@@ -1,11 +1,14 @@
 package com.husen.android.bitgram
 
 import android.annotation.SuppressLint
+import android.media.audiofx.AudioEffect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Scroller
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -146,8 +149,9 @@ class BitGramFragment : Fragment() {
 
             //Invisible loading animation
             anim_recycler_loading.visibility = View.INVISIBLE
-            // Visible recyclerview
+            // Visible recyclerview and search et
             bit_recycler_view.visibility = View.VISIBLE
+            cv_search.visibility = View.VISIBLE
             holder.bind(bitGramItem)
 //            thumbnailDownloader.queueThumbnail(holder, gramItem.symbol,
 //                gramItem.changePrice,
