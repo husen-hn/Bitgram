@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 
@@ -26,7 +27,6 @@ class BitGramActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navigationView: NavigationView = findViewById(R.id.navigation_view)
 
         setSupportActionBar(toolbar)
 
@@ -57,13 +57,6 @@ class BitGramActivity : AppCompatActivity() {
             val fragment = BitGramFragment.newInstance()
             replaceFragment(fragment)
         }
-//        val isFragmentContainerEmpty = savedInstanceState == null
-//        if (isFragmentContainerEmpty) {
-//            supportFragmentManager
-//                    .beginTransaction()
-//                    .add(R.id.fragmentContainer, BitGramFragment.newInstance())
-//                    .commit()
-//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -92,10 +85,8 @@ class BitGramActivity : AppCompatActivity() {
 
     private fun filterList(filterItem: String) {
 
-//        val dataSourceList = bitGramViewModel.dataSourceList
-
-//        val kucoinItemList = bitGramViewModel.gramItemLiveData.observe(
-//            viewLifecycleOwner,
+//        bitGramViewModel.bitGramItemsLiveData.observe(
+//            ,
 //            Observer { gramItem ->
 //
 //            })
@@ -103,10 +94,10 @@ class BitGramActivity : AppCompatActivity() {
 //        for (d in dataSourceList){
 //            if (filterItem in d.bitIdSymbol) {
 //
-//            }
+            }
 //        }
 //        BitGramFragment.newInstance().updateList()
-    }
+//    }
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager
