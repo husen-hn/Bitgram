@@ -32,7 +32,6 @@ class BitGramViewModel : ViewModel() {
             result.value = combineLatestData(kuCoinBits, ramzinexBits, dataSourceList)
         }
 
-        Log.e(TAG, "result: $result")
         return result
     }
 
@@ -57,7 +56,7 @@ class BitGramViewModel : ViewModel() {
                 val bitFaName = dataSourceItem?.bitFaName
 
                 val usaPrice = setCommas(gramItem.lastPrice)
-                val usaPercent = calPercent(
+                val usaPercent = calUsPercent(
                         gramItem.changePrice,
                         gramItem.lastPrice )
 
@@ -65,13 +64,9 @@ class BitGramViewModel : ViewModel() {
                 val irPrice = setCommas(
                     rialToToman((gramItem.lastPrice.toBigDecimal() * usdt.toBigDecimal()).toString())
                 )
-                val changePrice = calIrPriceChanges(
-                    rialToToman(ramzinexList[0].lastPrice),
-                    ramzinexList[0].changePercent)
-                val irPercent = calPercent(
-                    changePrice,
-                    ramzinexList[0].lastPrice
-                )
+                Log.e(TAG, "${ramzinexList[0].changePercent}, $usaPercent")
+                val irPercent = calIrPercent(ramzinexList[0].changePercent, usaPercent)
+                Log.e(TAG, "irPercent $irPercent, $usaPercent")
                 list.add(
                     BitGramItem(
                         bitLogoURL!!,
@@ -88,6 +83,7 @@ class BitGramViewModel : ViewModel() {
         }
         return list
     }
+
     private fun rialToToman(rial: String): String{
         val bigDecimalRial = rial.toBigDecimal()
         val roundedRial = "%.0f".format(bigDecimalRial)
@@ -114,20 +110,7 @@ class BitGramViewModel : ViewModel() {
         }
         return priceWithComma
     }
-    //calculate changed price of the toman with percent
-    private fun calIrPriceChanges(lastPrice: String, percent: String): String {
-        var changedPrice = (lastPrice.toFloat() * percent.toFloat()) / 100
-        when{
-            changedPrice > 0 -> {
-                changedPrice += lastPrice.toFloat()
-            }
-            changedPrice < 0 -> {
-                changedPrice -= lastPrice.toFloat()
-            }
-        }
-        return changedPrice.toString()
-    }
-    private fun calPercent(changePrice: String, lastPrice: String): String {
+    private fun calUsPercent(changePrice: String, lastPrice: String): String {
 
         val initialNum = lastPrice.toDouble() - changePrice.toDouble()
 
@@ -138,6 +121,14 @@ class BitGramViewModel : ViewModel() {
         val RoundPercent = df.format(percent)
 
         return RoundPercent
+    }
+    private fun calIrPercent(irPercent: String, usPercent: String): String {
+        val percent = irPercent.toDouble() + usPercent.toDouble()
+
+        //Round number to 0.01
+        val df = DecimalFormat("#.#")
+        df.roundingMode = RoundingMode.CEILING
+        return df.format(percent)
     }
 
     init {
