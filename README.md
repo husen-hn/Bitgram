@@ -28,7 +28,9 @@ Feel free to Fork, edit, then pull!
 * [x] Persian names
 * [x] Coin's icon, name in english and symbols
 * [ ] Searching
-* [ ] Navigation Drawer
+* [ ] Bottom Navigation
+* [ ] Bottom Navigation
+* [ ] +100 coins
 
 ### Preferences
 * [ ] Recyclerview pin feature
@@ -37,9 +39,12 @@ Feel free to Fork, edit, then pull!
 
 ### Features
 * [ ] Connection checking
+* [ ] Defi separation
+* [ ] ALTS prices
+* [ ] mini Chart
 
 ### Layouts
-* [ ] Dark theme
+* [x] Dark theme
 * [ ] Light theme
 * [ ] App Widget
 
@@ -48,7 +53,17 @@ Feel free to Fork, edit, then pull!
 * [ ] Cafebazaar
 * [ ] F-Droid
 
-## Used libraries, components and icons ⌯
+### Components
+* [x] LiveData
+* [x] ViewModel
+* [ ] Navigation Component
+* [X] RecyclerView
+
+### Architecture and pattern
+* [ ] MVVM
+* [x] Repository
+
+## Used libraries, icons ⌯
 * [Coil](https://coil-kt.github.io/coil/) by [coil-kt](https://github.com/coil-kt)
 * [Lottie](https://airbnb.design/lottie/) by [Airbnb](https://airbnb.io/)
 * [Gson](https://github.com/google/gson) by [Google](https://opensource.google/)
@@ -59,5 +74,6 @@ Feel free to Fork, edit, then pull!
 
 ## License ©
 ```
-Copyright © 2020 Hossein HassanNejad, Licensed under the GNU Version 3 license.
+Copyright © 2020 Hossein HassanNejad 
+Licensed under the GNU Version 3 license.
 ```
