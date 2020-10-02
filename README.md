@@ -29,7 +29,6 @@ Feel free to Fork, edit, then pull!
 * [x] Coin's icon, name in english and symbols
 * [ ] Searching
 * [ ] Bottom Navigation
-* [ ] Bottom Navigation
 * [ ] +100 coins
 
 ### Preferences
