@@ -1,14 +1,17 @@
 package com.husen.android.bitgram
 
 import android.annotation.SuppressLint
-import android.media.audiofx.AudioEffect
+import android.graphics.Movie
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.ImageView
-import android.widget.Scroller
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 
+
 private const val TAG = "BitgramFragment"
 
 class BitGramFragment : Fragment() {
@@ -30,6 +34,7 @@ class BitGramFragment : Fragment() {
     private val bitGramViewModel: BitGramViewModel by lazy {
         ViewModelProvider(this).get(BitGramViewModel::class.java)
     }
+    private lateinit var bitGramItemList: List<BitGramItem>
     private lateinit var thumbnailDownloader: ThumbnailDownloader<BitHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +68,33 @@ class BitGramFragment : Fragment() {
             viewLifecycleOwner,
             Observer { bitGramItem ->
                 bitRecyclerView.adapter = BitAdapter(bitGramItem)
+                bitGramItemList = bitGramItem
             })
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // searching
+        et_search.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                filterList(p0.toString())
+            }
+
+        })
+    }
+
+    private fun filterList(searchedText: String) {
+
+        val list = bitGramItemList.filter {
+            it.bitSymbol == searchedText
+            it.bitName == searchedText
+            it.bitFaName == searchedText
+        }
+        BitAdapter(list).updateList(list)
     }
 
     override fun onDestroy() {
@@ -134,18 +165,19 @@ class BitGramFragment : Fragment() {
     }
 
     private inner class BitAdapter(
-        private val bitGramItems: List<BitGramItem>
+        private var bitGramItems: List<BitGramItem>
     )
         : RecyclerView.Adapter<BitHolder>() {
+        var itemsList = bitGramItems
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BitHolder {
             val view = layoutInflater.inflate(R.layout.bit_list_card_view, parent, false)
             return BitHolder(view)
         }
 
-        override fun getItemCount(): Int = bitGramItems.size
+        override fun getItemCount(): Int = itemsList.size
 
         override fun onBindViewHolder(holder: BitHolder, position: Int) {
-            val bitGramItem = bitGramItems[position]
+            val bitGramItem = itemsList[position]
 
             //Invisible loading animation
             anim_recycler_loading.visibility = View.INVISIBLE
@@ -156,6 +188,12 @@ class BitGramFragment : Fragment() {
 //            thumbnailDownloader.queueThumbnail(holder, gramItem.symbol,
 //                gramItem.changePrice,
 //                gramItem.lastPrice)
+        }
+
+        fun updateList(list: List<BitGramItem>) {
+            //TODO notify datasets
+            itemsList = list
+            notifyDataSetChanged()
         }
     }
 
