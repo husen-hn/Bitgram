@@ -2,34 +2,35 @@ package com.husen.android.bitgram
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.husen.android.bitgram.databinding.BitListCardViewBinding
+import com.husen.android.bitgram.databinding.FragmentBitgramBinding
 import kotlinx.android.synthetic.main.fragment_bitgram.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 private const val TAG = "BitgramFragment"
 
 class BitGramFragment : Fragment() {
 
-    private lateinit var bitRecyclerView: RecyclerView
-    private var adapter: BitAdapter? = null
+//    private lateinit var bitRecyclerView: RecyclerView
+//    private var adapter: BitAdapter? = null
     private val bitGramViewModel: BitGramViewModel by lazy {
         ViewModelProvider(this).get(BitGramViewModel::class.java)
     }
+    private lateinit var binding: FragmentBitgramBinding
     private lateinit var thumbnailDownloader: ThumbnailDownloader<BitHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,12 +47,20 @@ class BitGramFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_bitgram, container, false)
+        binding = DataBindingUtil
+            .inflate(inflater, R.layout.fragment_bitgram, container, false)
 
-        bitRecyclerView = view.findViewById(R.id.bit_recycler_view) as RecyclerView
-        bitRecyclerView.layoutManager = LinearLayoutManager(context)
-        bitRecyclerView.adapter = adapter
-        adapter?.notifyDataSetChanged()
+        val view = binding.root
+
+        binding.bitRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            bitGramViewModel.bitGramItemsLiveData.observe(
+                viewLifecycleOwner,
+                Observer { bitGramItem ->
+                    adapter = BitAdapter(bitGramItem)
+                })
+            adapter?.notifyDataSetChanged()
+        }
 
         return view
     }
@@ -59,11 +68,11 @@ class BitGramFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bitGramViewModel.bitGramItemsLiveData.observe(
-            viewLifecycleOwner,
-            Observer { bitGramItem ->
-                bitRecyclerView.adapter = BitAdapter(bitGramItem)
-            })
+//        bitGramViewModel.bitGramItemsLiveData.observe(
+//            viewLifecycleOwner,
+//            Observer { bitGramItem ->
+//                bitRecyclerView.adapter = BitAdapter(bitGramItem)
+//            })
     }
 
     override fun onDestroy() {
@@ -73,64 +82,40 @@ class BitGramFragment : Fragment() {
         )
     }
 
-    private inner class BitHolder(view: View)
-        : RecyclerView.ViewHolder(view) {
+    private inner class BitHolder(private val binding: BitListCardViewBinding)
+        : RecyclerView.ViewHolder(binding.root) {
 
-        // Coin Icon & Name & Symbol
-        private val bitIcon: ImageView = itemView.findViewById(R.id.iv_bit_list)
-        private val bitName: TextView = itemView.findViewById(R.id.tv_bit_name_list)
-        private val bitFaName: TextView = itemView.findViewById(R.id.tv_bit_fa_name_list)
-        private val bitSymbol: TextView = itemView.findViewById(R.id.tv_bit_symbol_list)
-
-        // Coin Price & Price Percent & Icon in $
-        private val usaPrice: TextView = itemView.findViewById(R.id.tv_usa_price)
-        private val usaPercent: TextView = itemView.findViewById(R.id.tv_usa_percent)
-        private val usaPercentIcon: ImageView = itemView.findViewById(R.id.iv_usa_arrow)
-
-        // Coin Price & Price Percent & Icon in Toman
-        private val irPrice: TextView = itemView.findViewById(R.id.tv_ir_price)
-        private val irPercent: TextView = itemView.findViewById(R.id.tv_ir_percent)
-        private val irPercentIcon: ImageView = itemView.findViewById(R.id.iv_ir_arrow)
+        init {
+            binding.viewModel = BitGramViewModelVM()
+        }
 
         @SuppressLint("SetTextI18n")
 
         fun bind(bitGramItem: BitGramItem) {
 
-            CoroutineScope(Main).launch {
-
-                bitIcon.load(bitGramItem.bitLogoURL)
-
-                bitName.text = bitGramItem.bitName
-                bitSymbol.text = bitGramItem.bitSymbol
-                bitFaName.text = bitGramItem.bitFaName
-
-                usaPrice.text = "${bitGramItem.usaPrice} $"
-                usaPercent.text = "${bitGramItem.usaPercent}%"
-                changePercentColorAndIcon(bitGramItem.usaPercent, usaPercent, usaPercentIcon)
-
-                irPrice.text = "${bitGramItem.irPrice} تومان"
-                irPercent.text = "${bitGramItem.irPercent}%"
-                changePercentColorAndIcon(bitGramItem.irPercent, irPercent, irPercentIcon)
+            binding.apply {
+                viewModel?.bitGramItem = bitGramItem
+                executePendingBindings()
             }
 
         }
-        private fun changePercentColorAndIcon(
-            percent: String,
-            tvPercent: TextView,
-            ivPercent: ImageView
-        ) {
-            val percentInDouble = percent.toDouble()
-            when{
-                percentInDouble >= 0.0 -> {
-                    tvPercent.setTextColor(resources.getColor(R.color.Green))
-                    ivPercent.load(R.drawable.up)
-                }
-                percentInDouble < 0.0 -> {
-                    tvPercent.setTextColor(resources.getColor(R.color.darkerRed))
-                    ivPercent.load(R.drawable.down)
-                }
-            }
-        }
+//        private fun changePercentColorAndIcon(
+//            percent: String,
+//            tvPercent: TextView,
+//            ivPercent: ImageView
+//        ) {
+//            val percentInDouble = percent.toDouble()
+//            when{
+//                percentInDouble >= 0.0 -> {
+//                    tvPercent.setTextColor(resources.getColor(R.color.Green))
+//                    ivPercent.load(R.drawable.up)
+//                }
+//                percentInDouble < 0.0 -> {
+//                    tvPercent.setTextColor(resources.getColor(R.color.darkerRed))
+//                    ivPercent.load(R.drawable.down)
+//                }
+//            }
+//        }
     }
 
     private inner class BitAdapter(
@@ -138,8 +123,14 @@ class BitGramFragment : Fragment() {
     )
         : RecyclerView.Adapter<BitHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BitHolder {
-            val view = layoutInflater.inflate(R.layout.bit_list_card_view, parent, false)
-            return BitHolder(view)
+            val binding = DataBindingUtil.inflate<BitListCardViewBinding>(
+                layoutInflater,
+                R.layout.bit_list_card_view,
+                parent,
+                false
+            )
+
+            return BitHolder(binding)
         }
 
         override fun getItemCount(): Int = bitGramItems.size
