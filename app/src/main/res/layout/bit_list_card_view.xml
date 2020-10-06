@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -25,7 +25,7 @@
             android:layout_height="65dp">
 
             <ImageView
-                android:id="@+id/iv_bit_list"
+                android:id="@+id/iv_bit_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
@@ -38,7 +38,7 @@
                 app:srcCompat="@android:drawable/ic_dialog_info" />
 
             <TextView
-                android:id="@+id/tv_bit_name_list"
+                android:id="@+id/tv_bit_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.bitName}"
@@ -47,22 +47,22 @@
                 android:textColor="@color/txtColor"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/iv_bit_list"
+                app:layout_constraintStart_toEndOf="@+id/iv_bit_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_bit_symbol_list"
+                android:id="@+id/tv_bit_symbol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.bitSymbol}"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/txtColor3"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/tv_bit_name_list"
-                app:layout_constraintTop_toTopOf="@+id/tv_bit_name_list" />
+                app:layout_constraintStart_toEndOf="@+id/tv_bit_name"
+                app:layout_constraintTop_toTopOf="@+id/tv_bit_name" />
 
             <TextView
-                android:id="@+id/tv_bit_fa_name_list"
+                android:id="@+id/tv_bit_fa_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.bitFaName}"
@@ -71,73 +71,55 @@
                 android:textColor="@color/txtColor2"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_bit_list" />
-
-            <ImageView
-                android:id="@+id/iv_usa_arrow"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_usa_flag"
-                app:layout_constraintEnd_toStartOf="@+id/tv_usa_percent"
-                app:layout_constraintTop_toTopOf="@+id/iv_usa_flag"
-                app:layout_constraintVertical_bias="1.0"
-                android:contentDescription="@string/usa_arrorw" />
-
-            <ImageView
-                android:id="@+id/iv_ir_arrow"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_ir_flag"
-                app:layout_constraintEnd_toStartOf="@+id/tv_ir_percent"
-                app:layout_constraintTop_toTopOf="@+id/iv_ir_flag"
-                android:contentDescription="@string/ir_arrow" />
+                app:layout_constraintStart_toEndOf="@+id/iv_bit_icon" />
 
             <TextView
-                android:id="@+id/tv_usa_percent"
-                android:text="@{viewModel.bitUsPercent}"
+                android:id="@+id/tv_usa_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
+                android:textColor="@color/txtColor"
+                android:text="@{viewModel.bitUsPrice}"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_usa_flag"
+                app:layout_constraintEnd_toStartOf="@+id/tv_usa_percent"
+                app:layout_constraintTop_toTopOf="@+id/iv_usa_flag"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tv_usa_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@{viewModel.bitUsPercent}"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_usa_flag"
                 app:layout_constraintEnd_toStartOf="@+id/iv_usa_flag"
                 app:layout_constraintTop_toTopOf="@+id/iv_usa_flag" />
 
             <TextView
-                android:id="@+id/tv_ir_percent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.bitIrPercent}"
-                android:layout_marginEnd="4dp"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_ir_flag"
-                app:layout_constraintEnd_toStartOf="@+id/iv_ir_flag"
-                app:layout_constraintTop_toTopOf="@+id/iv_ir_flag" />
-
-            <TextView
-                android:id="@+id/tv_usa_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.bitUsPrice}"
-                android:layout_marginEnd="4dp"
-                android:textColor="@color/txtColor"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_usa_flag"
-                app:layout_constraintEnd_toStartOf="@+id/iv_usa_arrow"
-                app:layout_constraintTop_toTopOf="@+id/iv_usa_flag" />
-
-            <TextView
                 android:id="@+id/tv_ir_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.bitIrPrice}"
                 android:layout_marginEnd="4dp"
+                android:text="@{viewModel.bitIrPrice}"
                 android:textColor="@color/txtColor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_ir_flag"
-                app:layout_constraintEnd_toStartOf="@+id/iv_ir_arrow"
+                app:layout_constraintEnd_toStartOf="@+id/tv_ir_percent"
+                app:layout_constraintTop_toTopOf="@+id/iv_ir_flag"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tv_ir_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:textSize="12sp"
+                android:textColor="@{viewModel.bitIrPercentColor}"
+                android:text="@{viewModel.bitIrPercent}"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_ir_flag"
+                app:layout_constraintEnd_toStartOf="@+id/iv_ir_flag"
                 app:layout_constraintTop_toTopOf="@+id/iv_ir_flag" />
 
             <ImageView
@@ -145,9 +127,9 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginEnd="4dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_bit_symbol_list"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_bit_symbol"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_bit_symbol_list"
+                app:layout_constraintTop_toTopOf="@+id/tv_bit_symbol"
                 app:srcCompat="@drawable/usa"
                 android:contentDescription="@string/usa_flag" />
 
@@ -156,9 +138,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_bit_fa_name_list"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_bit_fa_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_bit_fa_name_list"
+                app:layout_constraintTop_toTopOf="@+id/tv_bit_fa_name"
                 app:srcCompat="@drawable/ir"
                 android:contentDescription="@string/ir_flag" />
 

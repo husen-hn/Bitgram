@@ -1,6 +1,8 @@
 package com.husen.android.bitgram
 
+import android.content.Context
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -55,18 +57,43 @@ class BitGramViewModel : ViewModel() {
                 val bitSymbol = dataSourceItem?.bitSymbol
                 val bitFaName = dataSourceItem?.bitFaName
 
-                val usaPrice = setCommas(gramItem.lastPrice)
-                val usaPercent = calUsPercent(
+                val usaPrice = addSign(
+                        setCommas(gramItem.lastPrice), " $")
+
+                val usaPercent = addSign(
+                    calUsPercent(
+                        gramItem.changePrice,
+                        gramItem.lastPrice ), "%")
+
+                val usaPercentColor = setPercentColor(
+                    calUsPercent(
                         gramItem.changePrice,
                         gramItem.lastPrice )
+                )
+
 
                 val usdt = ramzinexList[0].lastPrice
-                val irPrice = setCommas(
+
+                val irPrice = addSign(
+                    setCommas(
                     rialToToman((gramItem.lastPrice.toBigDecimal() * usdt.toBigDecimal()).toString())
+                ), " تومان")
+
+                val irPercent = addSign(
+                    calIrPercent(
+                        ramzinexList[0].changePercent,
+                        calUsPercent(
+                            gramItem.changePrice,
+                            gramItem.lastPrice )), "%")
+
+                val irPercentColor = setPercentColor(
+                    calIrPercent(
+                        ramzinexList[0].changePercent,
+                        calUsPercent(
+                            gramItem.changePrice,
+                            gramItem.lastPrice ))
                 )
-                Log.e(TAG, "${ramzinexList[0].changePercent}, $usaPercent")
-                val irPercent = calIrPercent(ramzinexList[0].changePercent, usaPercent)
-                Log.e(TAG, "irPercent $irPercent, $usaPercent")
+
                 list.add(
                     BitGramItem(
                         bitLogoURL!!,
@@ -75,8 +102,10 @@ class BitGramViewModel : ViewModel() {
                         bitFaName!!,
                         usaPrice,
                         usaPercent,
+                        usaPercentColor,
                         irPrice,
-                        irPercent
+                        irPercent,
+                        irPercentColor
                     )
                 )
             }
@@ -129,6 +158,26 @@ class BitGramViewModel : ViewModel() {
         val df = DecimalFormat("#.#")
         df.roundingMode = RoundingMode.CEILING
         return df.format(percent)
+    }
+    //add sign to end of price
+    private fun addSign(price: String, sign: String): String {
+        return "$price$sign"
+    }
+    private fun setPercentColor(
+        percent: String
+    ): Int {
+        val percentInDouble = percent.toDouble()
+        var color: Int? = null
+        when{
+            percentInDouble >= 0.0 -> {
+                //TODO get color
+
+            }
+            percentInDouble < 0.0 -> {
+                //TODO get color
+            }
+        }
+        return color!!
     }
 
     init {

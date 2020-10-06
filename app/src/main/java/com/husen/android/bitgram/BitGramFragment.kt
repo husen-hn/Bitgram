@@ -25,8 +25,6 @@ private const val TAG = "BitgramFragment"
 
 class BitGramFragment : Fragment() {
 
-//    private lateinit var bitRecyclerView: RecyclerView
-//    private var adapter: BitAdapter? = null
     private val bitGramViewModel: BitGramViewModel by lazy {
         ViewModelProvider(this).get(BitGramViewModel::class.java)
     }
@@ -61,18 +59,7 @@ class BitGramFragment : Fragment() {
                 })
             adapter?.notifyDataSetChanged()
         }
-
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        bitGramViewModel.bitGramItemsLiveData.observe(
-//            viewLifecycleOwner,
-//            Observer { bitGramItem ->
-//                bitRecyclerView.adapter = BitAdapter(bitGramItem)
-//            })
     }
 
     override fun onDestroy() {
@@ -97,25 +84,7 @@ class BitGramFragment : Fragment() {
                 viewModel?.bitGramItem = bitGramItem
                 executePendingBindings()
             }
-
         }
-//        private fun changePercentColorAndIcon(
-//            percent: String,
-//            tvPercent: TextView,
-//            ivPercent: ImageView
-//        ) {
-//            val percentInDouble = percent.toDouble()
-//            when{
-//                percentInDouble >= 0.0 -> {
-//                    tvPercent.setTextColor(resources.getColor(R.color.Green))
-//                    ivPercent.load(R.drawable.up)
-//                }
-//                percentInDouble < 0.0 -> {
-//                    tvPercent.setTextColor(resources.getColor(R.color.darkerRed))
-//                    ivPercent.load(R.drawable.down)
-//                }
-//            }
-//        }
     }
 
     private inner class BitAdapter(
@@ -150,9 +119,10 @@ class BitGramFragment : Fragment() {
     }
 
     // update recycler view after searching
-//    fun updateList(gramItems: List<BitGramItem>, dataSourceList: HashMap<String, DataSourceItem>) {
-//        BitAdapter(gramItems, dataSourceList)
-//    }
+    /*
+    fun updateList(gramItems: List<BitGramItem>, dataSourceList: HashMap<String, DataSourceItem>) {
+        BitAdapter(gramItems, dataSourceList)
+    } */
 
     companion object {
         fun newInstance() = BitGramFragment()
