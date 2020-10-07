@@ -2,8 +2,10 @@ package com.husen.android.bitgram
 
 import android.content.Context
 import android.util.Log
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
+import org.w3c.dom.Text
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -166,17 +168,19 @@ class BitGramViewModel : ViewModel() {
     private fun setPercentColor(
         percent: String
     ): Int {
-        val percentInDouble = percent.toDouble()
+//        val percentInDouble = percent.toDouble()
         var color: Int? = null
-        when{
-            percentInDouble >= 0.0 -> {
-                //TODO get color
-
-            }
-            percentInDouble < 0.0 -> {
-                //TODO get color
-            }
-        }
+//        val greenColor = ContextCompat.getColor(view.context, R.color.green)
+//        val darkerRedColor = ContextCompat.getColor(view.context, R.color.darkerRed)
+//        when{
+//            percentInDouble >= 0.0 -> {
+//                color = greenColor
+//
+//            }
+//            percentInDouble < 0.0 -> {
+//                color = darkerRedColor
+//            }
+//        }
         return color!!
     }
 

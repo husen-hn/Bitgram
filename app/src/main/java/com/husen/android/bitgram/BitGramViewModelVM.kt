@@ -53,22 +53,22 @@ class BitGramViewModelVM: BaseObservable() {
 
     @get:Bindable
     val bitIrPercentColor: Int?
-        get() = setPercentColor(R.id.tv_ir_percent, bitGramItem?.irPercent!!)
+        get() = bitGramItem?.irPercentColor
 
-    @BindingAdapter("myColorAttr")
-    fun setPercentColor(view: TextView, percent: String): Int? {
-        val percentInDouble = percent.toDouble()
-        var color: Int? = null
-        val greenColor = ContextCompat.getColor(view.context, R.color.green)
-        val darkerRedColor = ContextCompat.getColor(view.context, R.color.darkerRed)
-        when{
-            percentInDouble >= 0.0 -> {
-                color = greenColor
-            }
-            percentInDouble < 0.0 -> {
-                color = darkerRedColor
-            }
-        }
-        return color
-    }
+//    @BindingAdapter("myColorAttr")
+//    fun setPercentColor(view: TextView, percent: String): Int? {
+//        val percentInDouble = percent.toDouble()
+//        var color: Int? = null
+//        val greenColor = ContextCompat.getColor(view.context, R.color.green)
+//        val darkerRedColor = ContextCompat.getColor(view.context, R.color.darkerRed)
+//        when{
+//            percentInDouble >= 0.0 -> {
+//                color = greenColor
+//            }
+//            percentInDouble < 0.0 -> {
+//                color = darkerRedColor
+//            }
+//        }
+//        return color
+//    }
 }
