@@ -72,11 +72,10 @@ dependencies {
     //Lottie (Animation)
     implementation 'com.airbnb.android:lottie:3.4.1'
 
-    //Material
+    //Material Design
     implementation 'com.google.android.material:material:1.2.1'
 
     // Navigation component
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
-
 }

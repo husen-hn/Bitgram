@@ -5,13 +5,13 @@
     <color name="colorAccent">#FAC29A</color>
 
     <color name="bg">#2E303E</color>
-    <color name="bgCard">#1C1E26</color>
+    <color name="bgCard">#232530</color>
 
     <color name="txtColor">#FDF0ED</color>
     <color name="txtColor2">#6C6F93</color>
     <color name="txtColor3">#FAC29A</color>
 
-    <color name="Green">#1EB980</color>
+    <color name="blue">#25B2BC</color>
 
     <color name="darkerRed">#F43E5C</color>
 </resources>

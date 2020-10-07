@@ -1,17 +1,13 @@
 package com.husen.android.bitgram
 
 import android.annotation.SuppressLint
-import android.graphics.Movie
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.ImageView
-import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import kotlinx.android.synthetic.main.activity_bitgram.*
 import kotlinx.android.synthetic.main.fragment_bitgram.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
@@ -154,7 +149,7 @@ class BitGramFragment : Fragment() {
             val percentInDouble = percent.toDouble()
             when{
                 percentInDouble >= 0.0 -> {
-                    tvPercent.setTextColor(resources.getColor(R.color.Green))
+                    tvPercent.setTextColor(resources.getColor(R.color.blue))
                     ivPercent.load(R.drawable.up)
                 }
                 percentInDouble < 0.0 -> {

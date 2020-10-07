@@ -19,11 +19,12 @@
     <string name="star">به ما امتیاز بدهید!</string>
     <string name="share">پیشنهاد به دوستان</string>
     <string name="changes">تغییرات اخیر</string>
-    <string name="version">بیتگرام نسخه ۱.۰.۰</string>
+    <string name="version">نسخه بیتگرام شما ۱.۰.۰</string>
     <string name="search">جستوجو</string>
-    <string name="seach_cryptocurrency">Seach Cryptocurrency</string>
+    <string name="seach_cryptocurrency">Seach Cryptocurrency ...</string>
     <string name="home">Home</string>
     <string name="settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="subTitle">قیمت و ارزش بازار رمزارز ها</string>
+    <string name="familiarity_icon">familiarity</string>
+    <string name="left_arrow">left arrow</string>
 </resources>

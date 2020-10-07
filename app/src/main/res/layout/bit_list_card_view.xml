@@ -133,7 +133,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_bit_symbol_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_bit_symbol_list"
-            app:srcCompat="@drawable/usa"
+            app:srcCompat="@drawable/ic_usa_flag"
             android:contentDescription="@string/usa_flag" />
 
         <ImageView
@@ -144,7 +144,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_bit_fa_name_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_bit_fa_name_list"
-            app:srcCompat="@drawable/ir"
+            app:srcCompat="@drawable/ic_ir_flag"
             android:contentDescription="@string/ir_flag" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
