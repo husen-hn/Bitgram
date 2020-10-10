@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
@@ -62,27 +63,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_bit_list" />
 
-        <ImageView
-            android:id="@+id/iv_usa_arrow"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginEnd="2dp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_usa_flag"
-            app:layout_constraintEnd_toStartOf="@+id/tv_usa_percent"
-            app:layout_constraintTop_toTopOf="@+id/iv_usa_flag"
-            app:layout_constraintVertical_bias="1.0"
-            android:contentDescription="@string/usa_arrorw" />
-
-        <ImageView
-            android:id="@+id/iv_ir_arrow"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginEnd="2dp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_ir_flag"
-            app:layout_constraintEnd_toStartOf="@+id/tv_ir_percent"
-            app:layout_constraintTop_toTopOf="@+id/iv_ir_flag"
-            android:contentDescription="@string/ir_arrow" />
-
         <TextView
             android:id="@+id/tv_usa_percent"
             android:layout_width="wrap_content"
@@ -111,7 +91,7 @@
             android:textColor="@color/txtColor"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_usa_flag"
-            app:layout_constraintEnd_toStartOf="@+id/iv_usa_arrow"
+            app:layout_constraintEnd_toStartOf="@+id/tv_usa_percent"
             app:layout_constraintTop_toTopOf="@+id/iv_usa_flag" />
 
         <TextView
@@ -122,7 +102,7 @@
             android:textColor="@color/txtColor"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_ir_flag"
-            app:layout_constraintEnd_toStartOf="@+id/iv_ir_arrow"
+            app:layout_constraintEnd_toStartOf="@+id/tv_ir_percent"
             app:layout_constraintTop_toTopOf="@+id/iv_ir_flag" />
 
         <ImageView

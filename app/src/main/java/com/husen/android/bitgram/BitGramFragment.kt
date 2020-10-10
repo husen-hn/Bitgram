@@ -128,12 +128,10 @@ class BitGramFragment : Fragment(), View.OnClickListener {
         // Coin Price & Price Percent & Icon in $
         private val usaPrice: TextView = itemView.findViewById(R.id.tv_usa_price)
         private val usaPercent: TextView = itemView.findViewById(R.id.tv_usa_percent)
-        private val usaPercentIcon: ImageView = itemView.findViewById(R.id.iv_usa_arrow)
 
         // Coin Price & Price Percent & Icon in Toman
         private val irPrice: TextView = itemView.findViewById(R.id.tv_ir_price)
         private val irPercent: TextView = itemView.findViewById(R.id.tv_ir_percent)
-        private val irPercentIcon: ImageView = itemView.findViewById(R.id.iv_ir_arrow)
 
         @SuppressLint("SetTextI18n")
 
@@ -149,28 +147,25 @@ class BitGramFragment : Fragment(), View.OnClickListener {
 
                 usaPrice.text = "${bitGramItem.usaPrice} $"
                 usaPercent.text = "${bitGramItem.usaPercent}%"
-                changePercentColorAndIcon(bitGramItem.usaPercent, usaPercent, usaPercentIcon)
+                changePercentColor(bitGramItem.usaPercent, usaPercent)
 
                 irPrice.text = "${bitGramItem.irPrice} تومان"
                 irPercent.text = "${bitGramItem.irPercent}%"
-                changePercentColorAndIcon(bitGramItem.irPercent, irPercent, irPercentIcon)
+                changePercentColor(bitGramItem.irPercent, irPercent)
             }
 
         }
-        private fun changePercentColorAndIcon(
+        private fun changePercentColor(
             percent: String,
-            tvPercent: TextView,
-            ivPercent: ImageView
+            tvPercent: TextView
         ) {
             val percentInDouble = percent.toDouble()
             when{
                 percentInDouble >= 0.0 -> {
                     tvPercent.setTextColor(resources.getColor(R.color.blue))
-                    ivPercent.load(R.drawable.up)
                 }
                 percentInDouble < 0.0 -> {
                     tvPercent.setTextColor(resources.getColor(R.color.darkerRed))
-                    ivPercent.load(R.drawable.down)
                 }
             }
         }
