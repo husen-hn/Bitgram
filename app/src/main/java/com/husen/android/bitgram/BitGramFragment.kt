@@ -17,12 +17,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import kotlinx.android.synthetic.main.activity_bitgram.*
 import kotlinx.android.synthetic.main.fragment_bitgram.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-
 
 private const val TAG = "BitgramFragment"
 
