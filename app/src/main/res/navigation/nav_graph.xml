@@ -9,10 +9,18 @@
         android:id="@+id/nav_main_fragment"
         android:name="com.husen.android.bitgram.BitGramFragment"
         android:label="BitGramFragment"
-        tools:layout="@layout/fragment_bitgram"/>
+        tools:layout="@layout/fragment_bitgram">
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_settings_fragment"
+            app:destination="@id/nav_settings_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_settings_fragment"
         android:name="com.husen.android.bitgram.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_nav_settings_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+    </fragment>
 </navigation>

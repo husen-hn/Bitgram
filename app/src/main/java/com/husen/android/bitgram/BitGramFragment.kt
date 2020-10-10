@@ -12,9 +12,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import kotlinx.android.synthetic.main.activity_bitgram.*
 import kotlinx.android.synthetic.main.fragment_bitgram.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
@@ -23,7 +26,7 @@ import kotlinx.coroutines.launch
 
 private const val TAG = "BitgramFragment"
 
-class BitGramFragment : Fragment() {
+class BitGramFragment : Fragment(), View.OnClickListener {
 
     private lateinit var bitRecyclerView: RecyclerView
     private var adapter: BitAdapter? = null
@@ -32,6 +35,7 @@ class BitGramFragment : Fragment() {
     }
     private lateinit var bitGramItemList: List<BitGramItem>
     private lateinit var thumbnailDownloader: ThumbnailDownloader<BitHolder>
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,12 +64,24 @@ class BitGramFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        navController = Navigation.findNavController(view)
+        iv_home.setOnClickListener(this)
+        iv_settings.setOnClickListener(this)
+
         bitGramViewModel.bitGramItemsLiveData.observe(
             viewLifecycleOwner,
             Observer { bitGramItem ->
                 bitRecyclerView.adapter = BitAdapter(bitGramItem)
                 bitGramItemList = bitGramItem
             })
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0!!.id) {
+            R.id.iv_settings -> {
+                navController.navigate(R.id.action_nav_main_fragment_to_nav_settings_fragment)
+            }
+        }
     }
 
     override fun onStart() {
