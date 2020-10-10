@@ -201,8 +201,4 @@ class BitGramFragment : Fragment(), View.OnClickListener {
             notifyDataSetChanged()
         }
     }
-
-    companion object {
-        fun newInstance() = BitGramFragment()
-    }
 }

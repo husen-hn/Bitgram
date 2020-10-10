@@ -35,8 +35,4 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             }
         }
     }
-
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
 }
