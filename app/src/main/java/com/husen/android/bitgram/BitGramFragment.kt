@@ -29,15 +29,12 @@ class BitGramFragment : Fragment() {
         ViewModelProvider(this).get(BitGramViewModel::class.java)
     }
     private lateinit var binding: FragmentBitgramBinding
-    private lateinit var thumbnailDownloader: ThumbnailDownloader<BitHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         retainInstance = true
 
-        thumbnailDownloader = ThumbnailDownloader()
-        lifecycle.addObserver(thumbnailDownloader)
     }
 
     override fun onCreateView(
@@ -60,13 +57,6 @@ class BitGramFragment : Fragment() {
             adapter?.notifyDataSetChanged()
         }
         return view
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        lifecycle.removeObserver(
-            thumbnailDownloader
-        )
     }
 
     private inner class BitHolder(private val binding: BitListCardViewBinding)
@@ -112,9 +102,6 @@ class BitGramFragment : Fragment() {
             // Visible recyclerview
             bit_recycler_view.visibility = View.VISIBLE
             holder.bind(bitGramItem)
-//            thumbnailDownloader.queueThumbnail(holder, gramItem.symbol,
-//                gramItem.changePrice,
-//                gramItem.lastPrice)
         }
     }
 
