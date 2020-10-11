@@ -92,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
+                app:setColor="@{viewModel.bitUsPercentColor}"
                 android:text="@{viewModel.bitUsPercent}"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_usa_flag"
@@ -117,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:textSize="12sp"
-
+                app:setColor="@{viewModel.bitIrPercentColor}"
                 android:text="@{viewModel.bitIrPercent}"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_ir_flag"
                 app:layout_constraintEnd_toStartOf="@+id/iv_ir_flag"

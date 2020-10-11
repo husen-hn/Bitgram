@@ -1,6 +1,7 @@
 package com.husen.android.bitgram
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -67,11 +68,11 @@ class BitGramViewModel : ViewModel() {
                         gramItem.changePrice,
                         gramItem.lastPrice ), "%")
 
-//                val usaPercentColor = setPercentColor(
-//                    calUsPercent(
-//                        gramItem.changePrice,
-//                        gramItem.lastPrice )
-//                )
+                val usaPercentColor = setPercentColor(
+                    calUsPercent(
+                        gramItem.changePrice,
+                        gramItem.lastPrice )
+                )
 
 
                 val usdt = ramzinexList[0].lastPrice
@@ -88,13 +89,13 @@ class BitGramViewModel : ViewModel() {
                             gramItem.changePrice,
                             gramItem.lastPrice )), "%")
 
-//                val irPercentColor = setPercentColor(
-//                    calIrPercent(
-//                        ramzinexList[0].changePercent,
-//                        calUsPercent(
-//                            gramItem.changePrice,
-//                            gramItem.lastPrice ))
-//                )
+                val irPercentColor = setPercentColor(
+                    calIrPercent(
+                        ramzinexList[0].changePercent,
+                        calUsPercent(
+                            gramItem.changePrice,
+                            gramItem.lastPrice ))
+                )
 
                 list.add(
                     BitGramItem(
@@ -104,8 +105,10 @@ class BitGramViewModel : ViewModel() {
                         bitFaName!!,
                         usaPrice,
                         usaPercent,
+                        usaPercentColor,
                         irPrice,
-                        irPercent
+                        irPercent,
+                        irPercentColor
                     )
                 )
             }
@@ -163,23 +166,21 @@ class BitGramViewModel : ViewModel() {
     private fun addSign(price: String, sign: String): String {
         return "$price$sign"
     }
-    private fun setPercentColor(
-        percent: String
-    ): Int {
-//        val percentInDouble = percent.toDouble()
-        var color: Int? = null
-//        val greenColor = ContextCompat.getColor(view.context, R.color.green)
-//        val darkerRedColor = ContextCompat.getColor(view.context, R.color.darkerRed)
-//        when{
-//            percentInDouble >= 0.0 -> {
-//                color = greenColor
-//
-//            }
-//            percentInDouble < 0.0 -> {
-//                color = darkerRedColor
-//            }
-//        }
-        return color!!
+    private fun setPercentColor(percent: String): Int {
+        val percentInDouble = percent.toDouble()
+        val greenColor = R.color.green
+        val darkerRedColor = R.color.darkerRed
+
+        var color = greenColor
+            when{
+            percentInDouble >= 0.0 -> {
+                color = greenColor
+            }
+            percentInDouble < 0.0 -> {
+                color = darkerRedColor
+            }
+        }
+        return color
     }
 
     init {
