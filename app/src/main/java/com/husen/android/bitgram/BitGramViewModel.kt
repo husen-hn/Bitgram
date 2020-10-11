@@ -67,11 +67,11 @@ class BitGramViewModel : ViewModel() {
                         gramItem.changePrice,
                         gramItem.lastPrice ), "%")
 
-                val usaPercentColor = setPercentColor(
-                    calUsPercent(
-                        gramItem.changePrice,
-                        gramItem.lastPrice )
-                )
+//                val usaPercentColor = setPercentColor(
+//                    calUsPercent(
+//                        gramItem.changePrice,
+//                        gramItem.lastPrice )
+//                )
 
 
                 val usdt = ramzinexList[0].lastPrice
@@ -88,13 +88,13 @@ class BitGramViewModel : ViewModel() {
                             gramItem.changePrice,
                             gramItem.lastPrice )), "%")
 
-                val irPercentColor = setPercentColor(
-                    calIrPercent(
-                        ramzinexList[0].changePercent,
-                        calUsPercent(
-                            gramItem.changePrice,
-                            gramItem.lastPrice ))
-                )
+//                val irPercentColor = setPercentColor(
+//                    calIrPercent(
+//                        ramzinexList[0].changePercent,
+//                        calUsPercent(
+//                            gramItem.changePrice,
+//                            gramItem.lastPrice ))
+//                )
 
                 list.add(
                     BitGramItem(
@@ -104,10 +104,8 @@ class BitGramViewModel : ViewModel() {
                         bitFaName!!,
                         usaPrice,
                         usaPercent,
-                        usaPercentColor,
                         irPrice,
-                        irPercent,
-                        irPercentColor
+                        irPercent
                     )
                 )
             }

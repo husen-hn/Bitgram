@@ -7,8 +7,6 @@ data class BitGramItem(
     var bitFaName: String = "",
     var usaPrice: String = "",
     var usaPercent: String = "",
-    var usaPercentColor: Int?,
     var irPrice: String = "",
-    var irPercent: String = "",
-    var irPercentColor: Int?
+    var irPercent: String = ""
 )
