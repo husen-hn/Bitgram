@@ -1,4 +1,4 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.onbording
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,31 +7,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.husen.android.bitgram.R
+import kotlinx.android.synthetic.main.fragment_intro_one.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings.iv_home_s
 
-class SettingsFragment : Fragment(), View.OnClickListener {
+class IntroFragmentOne : Fragment(), View.OnClickListener {
 
     lateinit var navController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_intro_one, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-        iv_home_s.setOnClickListener(this)
-        iv_settings_s.setOnClickListener(this)
+        btn_one_next.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
         when(p0!!.id) {
-            R.id.iv_home_s -> {
-                navController.navigate(R.id.action_nav_settings_fragment_to_nav_main_fragment)
+            R.id.btn_one_next -> {
+                navController.navigate(R.id.action_introFragmentOne_to_introFragmentTwo)
             }
         }
     }
