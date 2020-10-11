@@ -1,7 +1,12 @@
 package com.husen.android.bitgram
 
+import android.content.Context
+import android.net.Uri
 import android.util.Log
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
+import org.w3c.dom.Text
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -32,7 +37,6 @@ class BitGramViewModel : ViewModel() {
             result.value = combineLatestData(kuCoinBits, ramzinexBits, dataSourceList)
         }
 
-        Log.e(TAG, "result: $result")
         return result
     }
 
@@ -56,22 +60,43 @@ class BitGramViewModel : ViewModel() {
                 val bitSymbol = dataSourceItem?.bitSymbol
                 val bitFaName = dataSourceItem?.bitFaName
 
-                val usaPrice = setCommas(gramItem.lastPrice)
-                val usaPercent = calPercent(
+                val usaPrice = addSign(
+                        setCommas(gramItem.lastPrice), " $")
+
+                val usaPercent = addSign(
+                    calUsPercent(
+                        gramItem.changePrice,
+                        gramItem.lastPrice ), "%")
+
+                val usaPercentColor = setPercentColor(
+                    calUsPercent(
                         gramItem.changePrice,
                         gramItem.lastPrice )
+                )
+
 
                 val usdt = ramzinexList[0].lastPrice
-                val irPrice = setCommas(
+
+                val irPrice = addSign(
+                    setCommas(
                     rialToToman((gramItem.lastPrice.toBigDecimal() * usdt.toBigDecimal()).toString())
+                ), " تومان")
+
+                val irPercent = addSign(
+                    calIrPercent(
+                        ramzinexList[0].changePercent,
+                        calUsPercent(
+                            gramItem.changePrice,
+                            gramItem.lastPrice )), "%")
+
+                val irPercentColor = setPercentColor(
+                    calIrPercent(
+                        ramzinexList[0].changePercent,
+                        calUsPercent(
+                            gramItem.changePrice,
+                            gramItem.lastPrice ))
                 )
-                val changePrice = calIrPriceChanges(
-                    rialToToman(ramzinexList[0].lastPrice),
-                    ramzinexList[0].changePercent)
-                val irPercent = calPercent(
-                    changePrice,
-                    ramzinexList[0].lastPrice
-                )
+
                 list.add(
                     BitGramItem(
                         bitLogoURL!!,
@@ -80,14 +105,17 @@ class BitGramViewModel : ViewModel() {
                         bitFaName!!,
                         usaPrice,
                         usaPercent,
+                        usaPercentColor,
                         irPrice,
-                        irPercent
+                        irPercent,
+                        irPercentColor
                     )
                 )
             }
         }
         return list
     }
+
     private fun rialToToman(rial: String): String{
         val bigDecimalRial = rial.toBigDecimal()
         val roundedRial = "%.0f".format(bigDecimalRial)
@@ -114,20 +142,7 @@ class BitGramViewModel : ViewModel() {
         }
         return priceWithComma
     }
-    //calculate changed price of the toman with percent
-    private fun calIrPriceChanges(lastPrice: String, percent: String): String {
-        var changedPrice = (lastPrice.toFloat() * percent.toFloat()) / 100
-        when{
-            changedPrice > 0 -> {
-                changedPrice += lastPrice.toFloat()
-            }
-            changedPrice < 0 -> {
-                changedPrice -= lastPrice.toFloat()
-            }
-        }
-        return changedPrice.toString()
-    }
-    private fun calPercent(changePrice: String, lastPrice: String): String {
+    private fun calUsPercent(changePrice: String, lastPrice: String): String {
 
         val initialNum = lastPrice.toDouble() - changePrice.toDouble()
 
@@ -138,6 +153,34 @@ class BitGramViewModel : ViewModel() {
         val RoundPercent = df.format(percent)
 
         return RoundPercent
+    }
+    private fun calIrPercent(irPercent: String, usPercent: String): String {
+        val percent = irPercent.toDouble() + usPercent.toDouble()
+
+        //Round number to 0.01
+        val df = DecimalFormat("#.#")
+        df.roundingMode = RoundingMode.CEILING
+        return df.format(percent)
+    }
+    //add sign to end of price
+    private fun addSign(price: String, sign: String): String {
+        return "$price$sign"
+    }
+    private fun setPercentColor(percent: String): Int {
+        val percentInDouble = percent.toDouble()
+        val blueColor = R.color.blue
+        val darkerRedColor = R.color.darkerRed
+
+        var color = blueColor
+            when{
+            percentInDouble >= 0.0 -> {
+                color = blueColor
+            }
+            percentInDouble < 0.0 -> {
+                color = darkerRedColor
+            }
+        }
+        return color
     }
 
     init {
