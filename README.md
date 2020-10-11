@@ -14,7 +14,7 @@ This project implemented in [Persian language](https://en.wikipedia.org/wiki/Per
 
 ## Previews ⛶
 
-//TODO preview images
+<img src="preview/scsht.jpg" alt="screenshots"  height="400">
 
 ## Contribute ༜
 Want to contribute? I would really appreciate a hand with the development to add more features in this app.
@@ -28,7 +28,7 @@ Feel free to Fork, edit, then pull!
 * [x] Persian names
 * [x] Coin's icon, name in english and symbols
 * [ ] Searching
-* [ ] Bottom Navigation
+* [x] Bottom Navigation
 * [ ] +100 coins
 
 ### Preferences
@@ -49,17 +49,18 @@ Feel free to Fork, edit, then pull!
 
 ### Release
 * [ ] Direct APK
-* [ ] Cafebazaar
 * [ ] F-Droid
+* [ ] Cafebazaar
 
 ### Components
 * [x] LiveData
 * [x] ViewModel
-* [ ] Navigation Component
+* [x] Data binding
+* [x] Navigation Component
 * [X] RecyclerView
 
 ### Architecture and pattern
-* [ ] MVVM
+* [x] MVVM
 * [x] Repository
 
 ## Used libraries, icons ⌯
