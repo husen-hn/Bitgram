@@ -112,6 +112,10 @@ class BitGramViewModel : ViewModel() {
                     )
                 )
             }
+            //fetch list from kucoin is not included tether so add it
+            list.add(
+                addTetherToList(dataSourceList["USDT-USDT"], ramzinexList[0])
+            )
         }
         return list
     }
@@ -181,6 +185,32 @@ class BitGramViewModel : ViewModel() {
             }
         }
         return color
+    }
+    //add tether to list
+    private fun addTetherToList(dataSourceItem: DataSourceItem?, ramzinexItem: RamzinexItem)
+            : BitGramItem {
+        return BitGramItem(
+            dataSourceItem!!.bitIconUrl,
+            dataSourceItem.bitName,
+            dataSourceItem.bitSymbol,
+            dataSourceItem.bitFaName,
+            "1 $",
+            "0%",
+            R.color.blue,
+            addSign(
+                setCommas(
+                    rialToToman((ramzinexItem.lastPrice.toBigDecimal()).toString())
+                ), " تومان"),
+            addSign(
+                calIrPercent(
+                    ramzinexItem.changePercent,
+                    "0"), "%"),
+            setPercentColor(
+                calIrPercent(
+                    ramzinexItem.changePercent,
+                    "0")
+            )
+        )
     }
 
     init {

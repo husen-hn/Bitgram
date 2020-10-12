@@ -69,7 +69,7 @@ class DataSource {
                     setIconUrl(bitSymbol[22]), setIconUrl(bitSymbol[23]), "https://assets-currency.kucoin.com/5cb08e9238300c4320a45e5a_Crypto.com%20Chain_token.png",
                     "https://assets-currency.kucoin.com/5e2128172c0a950008b9b5ef_NEO-token-logo-.png",
                     "https://assets-currency.kucoin.com/5d11efc8134ab772a9abdb39_Nem-Logo-Transparent-Border-.png",
-                    "https://ramzinex.com/exchange/img/coins/usdt.png"
+                    "https://assets-currency.kucoin.com/www/coin/pc/USDT.png"
                 )
 
                 for (index in bitIdSymbol.indices) {
