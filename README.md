@@ -27,7 +27,7 @@ Feel free to Fork, edit, then pull!
 * [x] Prices in I.R. Toman
 * [x] Persian names
 * [x] Coin's icon, name in english and symbols
-* [ ] Searching
+* [x] Searching
 * [x] Bottom Navigation
 * [ ] +100 coins
 
