@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class BitGramFragment : Fragment(), View.OnClickListener {
         ViewModelProvider(this).get(BitGramViewModel::class.java)
     }
     private lateinit var bitGramItemList: List<BitGramItem>
+    private lateinit var bitgramAdapter: BitGramFragment.BitAdapter
     lateinit var navController: NavController
     private lateinit var binding: FragmentBitgramBinding
 
@@ -52,7 +54,12 @@ class BitGramFragment : Fragment(), View.OnClickListener {
             bitGramViewModel.bitGramItemsLiveData.observe(
                 viewLifecycleOwner,
                 Observer { bitGramItem ->
-                    adapter = BitAdapter(bitGramItem)
+                    // used in searching
+                    bitGramItemList = bitGramItem
+                    //used in filter list to update list
+                    bitgramAdapter = BitAdapter(bitGramItem)
+                    // display all items list
+                    adapter = bitgramAdapter
                 })
             adapter?.notifyDataSetChanged()
         }
@@ -78,26 +85,27 @@ class BitGramFragment : Fragment(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
 
-        // searching
+        // searched item text
         et_search.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun afterTextChanged(p0: Editable?) {
-                filterList(p0.toString())
+                filterList(p0.toString().toLowerCase().trim())
             }
-
         })
     }
 
+    // filter list with searched item
     private fun filterList(searchedText: String) {
 
         val list = bitGramItemList.filter {
-            it.bitSymbol == searchedText
-            it.bitName == searchedText
-            it.bitFaName == searchedText
+            it.bitSymbol.toLowerCase().contains(searchedText) ||
+            it.bitName.toLowerCase().contains(searchedText) ||
+            it.bitFaName.contains(searchedText)
         }
-        BitAdapter(list).updateList(list)
+
+        bitgramAdapter.updateList(list)
     }
 
     private inner class BitHolder(private val binding: BitListCardViewBinding)
@@ -147,15 +155,15 @@ class BitGramFragment : Fragment(), View.OnClickListener {
         }
 
         fun updateList(list: List<BitGramItem>) {
-            //TODO notify datasets
-            itemsList = list
+
+            // if searched item empty or not in list display all items
+            itemsList = if (list.isEmpty()){
+                bitGramItems
+            }else {
+                list
+            }
             notifyDataSetChanged()
         }
-    // update recycler view after searching
-    /*
-    fun updateList(gramItems: List<BitGramItem>, dataSourceList: HashMap<String, DataSourceItem>) {
-        BitAdapter(gramItems, dataSourceList)
-    } */
 
     }
 }
