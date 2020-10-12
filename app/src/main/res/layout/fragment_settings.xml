@@ -391,7 +391,7 @@
         android:src="@drawable/ic_search_24"
         android:tint="@color/bg"
         app:layout_anchor="@id/bottom_app_bar_s"
-        app:maxImageSize="35dp"
+        app:maxImageSize="25dp"
         android:focusable="true" />
 
     <com.google.android.material.bottomappbar.BottomAppBar

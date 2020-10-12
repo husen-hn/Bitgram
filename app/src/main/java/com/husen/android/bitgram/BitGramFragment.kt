@@ -1,13 +1,16 @@
 package com.husen.android.bitgram
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.husen.android.bitgram.databinding.BitListCardViewBinding
 import com.husen.android.bitgram.databinding.FragmentBitgramBinding
 import kotlinx.android.synthetic.main.fragment_bitgram.*
+
 
 private const val TAG = "BitgramFragment"
 
@@ -85,8 +89,32 @@ class BitGramFragment : Fragment(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
 
+        //display search view with animation
+        val slideDown = AnimationUtils.loadAnimation(context, R.anim.slide_down)
+        val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
+
+        btn_fab.setOnClickListener {
+            cv_search.startAnimation(slideDown)
+            cv_search.visibility = View.VISIBLE
+            //open keyboard
+            et_search.requestFocus()
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.showSoftInput(et_search, InputMethodManager.SHOW_IMPLICIT)
+        }
+        cv_sv_back.setOnClickListener {
+            cv_search.startAnimation(slideUp)
+            cv_search.visibility = View.GONE
+            //hide keyboard
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.hideSoftInputFromWindow(et_search.windowToken, InputMethodManager.SHOW_IMPLICIT)
+            //delete searched text
+            et_search.setText("")
+            //display all coins normally when u back
+            bitgramAdapter.updateList(emptyList())
+        }
+
         // searched item text
-        et_search.addTextChangedListener(object : TextWatcher{
+        et_search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -150,7 +178,6 @@ class BitGramFragment : Fragment(), View.OnClickListener {
             anim_recycler_loading.visibility = View.INVISIBLE
             // Visible recyclerview and search et
             bit_recycler_view.visibility = View.VISIBLE
-            cv_search.visibility = View.VISIBLE
             holder.bind(bitGramItem)
         }
 

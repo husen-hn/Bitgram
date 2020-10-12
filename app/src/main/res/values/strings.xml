@@ -44,4 +44,5 @@
     <string name="IntroFragmentThree">قیمت ها براساس آخرین و بروز ترین قیمت دلار در هر لحظه بروز می شوند</string>
     <string name="IntroFragmentFour">بیش از ۱۰۰+ رمزارز</string>
     <string name="finish">تمام</string>
+    <string name="hide_searching_text_bar">Hide searching text bar</string>
 </resources>
