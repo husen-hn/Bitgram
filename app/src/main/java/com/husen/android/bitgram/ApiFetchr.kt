@@ -2,7 +2,6 @@ package com.husen.android.bitgram
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.husen.android.bitgram.api.KucoinApi
 import com.husen.android.bitgram.api.RamzinexApi
@@ -11,8 +10,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 private const val TAG = "KucoinFetchr"
 

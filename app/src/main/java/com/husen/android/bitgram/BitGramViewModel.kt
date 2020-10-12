@@ -1,7 +1,12 @@
 package com.husen.android.bitgram
 
+import android.content.Context
+import android.net.Uri
 import android.util.Log
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
+import org.w3c.dom.Text
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -55,18 +60,43 @@ class BitGramViewModel : ViewModel() {
                 val bitSymbol = dataSourceItem?.bitSymbol
                 val bitFaName = dataSourceItem?.bitFaName
 
-                val usaPrice = setCommas(gramItem.lastPrice)
-                val usaPercent = calUsPercent(
+                val usaPrice = addSign(
+                        setCommas(gramItem.lastPrice), " $")
+
+                val usaPercent = addSign(
+                    calUsPercent(
+                        gramItem.changePrice,
+                        gramItem.lastPrice ), "%")
+
+                val usaPercentColor = setPercentColor(
+                    calUsPercent(
                         gramItem.changePrice,
                         gramItem.lastPrice )
+                )
+
 
                 val usdt = ramzinexList[0].lastPrice
-                val irPrice = setCommas(
+
+                val irPrice = addSign(
+                    setCommas(
                     rialToToman((gramItem.lastPrice.toBigDecimal() * usdt.toBigDecimal()).toString())
+                ), " تومان")
+
+                val irPercent = addSign(
+                    calIrPercent(
+                        ramzinexList[0].changePercent,
+                        calUsPercent(
+                            gramItem.changePrice,
+                            gramItem.lastPrice )), "%")
+
+                val irPercentColor = setPercentColor(
+                    calIrPercent(
+                        ramzinexList[0].changePercent,
+                        calUsPercent(
+                            gramItem.changePrice,
+                            gramItem.lastPrice ))
                 )
-                Log.e(TAG, "${ramzinexList[0].changePercent}, $usaPercent")
-                val irPercent = calIrPercent(ramzinexList[0].changePercent, usaPercent)
-                Log.e(TAG, "irPercent $irPercent, $usaPercent")
+
                 list.add(
                     BitGramItem(
                         bitLogoURL!!,
@@ -75,11 +105,17 @@ class BitGramViewModel : ViewModel() {
                         bitFaName!!,
                         usaPrice,
                         usaPercent,
+                        usaPercentColor,
                         irPrice,
-                        irPercent
+                        irPercent,
+                        irPercentColor
                     )
                 )
             }
+            //fetch list from kucoin is not included tether so add it
+            list.add(
+                addTetherToList(dataSourceList["USDT-USDT"], ramzinexList[0])
+            )
         }
         return list
     }
@@ -129,6 +165,52 @@ class BitGramViewModel : ViewModel() {
         val df = DecimalFormat("#.#")
         df.roundingMode = RoundingMode.CEILING
         return df.format(percent)
+    }
+    //add sign to end of price
+    private fun addSign(price: String, sign: String): String {
+        return "$price$sign"
+    }
+    private fun setPercentColor(percent: String): Int {
+        val percentInDouble = percent.toDouble()
+        val blueColor = R.color.blue
+        val darkerRedColor = R.color.darkerRed
+
+        var color = blueColor
+            when{
+            percentInDouble >= 0.0 -> {
+                color = blueColor
+            }
+            percentInDouble < 0.0 -> {
+                color = darkerRedColor
+            }
+        }
+        return color
+    }
+    //add tether to list
+    private fun addTetherToList(dataSourceItem: DataSourceItem?, ramzinexItem: RamzinexItem)
+            : BitGramItem {
+        return BitGramItem(
+            dataSourceItem!!.bitIconUrl,
+            dataSourceItem.bitName,
+            dataSourceItem.bitSymbol,
+            dataSourceItem.bitFaName,
+            "1 $",
+            "0%",
+            R.color.blue,
+            addSign(
+                setCommas(
+                    rialToToman((ramzinexItem.lastPrice.toBigDecimal()).toString())
+                ), " تومان"),
+            addSign(
+                calIrPercent(
+                    ramzinexItem.changePercent,
+                    "0"), "%"),
+            setPercentColor(
+                calIrPercent(
+                    ramzinexItem.changePercent,
+                    "0")
+            )
+        )
     }
 
     init {

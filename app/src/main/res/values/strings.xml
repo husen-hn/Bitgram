@@ -19,6 +19,30 @@
     <string name="star">به ما امتیاز بدهید!</string>
     <string name="share">پیشنهاد به دوستان</string>
     <string name="changes">تغییرات اخیر</string>
-    <string name="version">بیتگرام نسخه ۱.۰.۰</string>
+    <string name="version">نسخه بیتگرام شما ۱.۰.۰</string>
     <string name="search">جستوجو</string>
+    <string name="seach_cryptocurrency">Seach Cryptocurrency ...</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="subTitle">قیمت و ارزش بازار رمزارز ها</string>
+    <string name="familiarity_icon">familiarity</string>
+    <string name="left_arrow">left arrow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dot">dot</string>
+    <string name="_0_2_0">نسخه 0.2.0</string>
+    <string name="_1_0_0">نسخه 1.0.0</string>
+    <string name="_dis_0_2_0">قیمت به تومان\nاضافه شدن ۲۵ رمزارز\nمنو تنظیمات\nجستوجو</string>
+    <string name="_dis_1_0_0">انیمشن\nبیش از ۱۰۰ رمزارز\nبهبود عملکرد\nاصلاح باگ های اخیر</string>
+    <string name="source_github">سورس کد اپلیکشن در گیتهاب</string>
+    <string name="about_disc">بیگرام اپلیکشنی ساده برای نمایش آخرین قیمت رمزارزها.\n\nدر این پروژه از سرویس های کوکوین و رمزینکس استفاده شده است.</string>
+    <string name="license">این اپلیکشن با لایسنس GNU نسخه ۳ منتشر شده است.</string>
+    <string name="introFragmentOne">رصد بروز ترین قیمت رمزارزها</string>
+    <string name="next">ادامه</string>
+    <string name="back">برگشت</string>
+    <string name="IntroFragmentTwo">نمایش همزمان قیمت ها بصورت دلاری و تومان</string>
+    <string name="IntroFragmentThree">قیمت ها براساس آخرین و بروز ترین قیمت دلار در هر لحظه بروز می شوند</string>
+    <string name="IntroFragmentFour">بیش از ۱۰۰+ رمزارز</string>
+    <string name="finish">تمام</string>
+    <string name="hide_searching_text_bar">Hide searching text bar</string>
 </resources>

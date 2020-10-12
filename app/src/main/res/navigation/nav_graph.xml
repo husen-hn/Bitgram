@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_main_fragment">
+
+    <fragment
+        android:id="@+id/nav_main_fragment"
+        android:name="com.husen.android.bitgram.BitGramFragment"
+        android:label="BitGramFragment"
+        tools:layout="@layout/fragment_bitgram">
+        <action
+            android:id="@+id/action_nav_main_fragment_to_nav_settings_fragment"
+            app:destination="@id/nav_settings_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_settings_fragment"
+        android:name="com.husen.android.bitgram.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_nav_settings_fragment_to_nav_main_fragment"
+            app:destination="@id/nav_main_fragment" />
+        <action
+            android:id="@+id/action_nav_settings_fragment_to_lastChangesFragment"
+            app:destination="@id/lastChangesFragment" />
+        <action
+            android:id="@+id/action_nav_settings_fragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_nav_settings_fragment_to_introFragmentOne"
+            app:destination="@id/introFragmentOne" />
+    </fragment>
+    <fragment
+        android:id="@+id/lastChangesFragment"
+        android:name="com.husen.android.bitgram.settings.LastChangesFragment"
+        android:label="fragment_last_changes"
+        tools:layout="@layout/fragment_last_changes" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.husen.android.bitgram.settings.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/introFragmentOne"
+        android:name="com.husen.android.bitgram.onbording.IntroFragmentOne"
+        android:label="fragment_intro_one"
+        tools:layout="@layout/fragment_intro_one" >
+        <action
+            android:id="@+id/action_introFragmentOne_to_introFragmentTwo"
+            app:destination="@id/introFragmentTwo" />
+    </fragment>
+    <fragment
+        android:id="@+id/introFragmentTwo"
+        android:name="com.husen.android.bitgram.onbording.IntroFragmentTwo"
+        android:label="fragment_intro_two"
+        tools:layout="@layout/fragment_intro_two" >
+        <action
+            android:id="@+id/action_introFragmentTwo_to_introFragmentThree"
+            app:destination="@id/introFragmentThree" />
+        <action
+            android:id="@+id/action_introFragmentTwo_to_introFragmentOne"
+            app:destination="@id/introFragmentOne" />
+    </fragment>
+    <fragment
+        android:id="@+id/introFragmentThree"
+        android:name="com.husen.android.bitgram.onbording.IntroFragmentThree"
+        android:label="fragment_intro_three"
+        tools:layout="@layout/fragment_intro_three" >
+        <action
+            android:id="@+id/action_introFragmentThree_to_introFragmentFour"
+            app:destination="@id/introFragmentFour" />
+        <action
+            android:id="@+id/action_introFragmentThree_to_introFragmentTwo"
+            app:destination="@id/introFragmentTwo" />
+    </fragment>
+    <fragment
+        android:id="@+id/introFragmentFour"
+        android:name="com.husen.android.bitgram.onbording.IntroFragmentFour"
+        android:label="fragment_intro_four"
+        tools:layout="@layout/fragment_intro_four" >
+        <action
+            android:id="@+id/action_introFragmentFour_to_nav_settings_fragment"
+            app:destination="@id/nav_settings_fragment" />
+        <action
+            android:id="@+id/action_introFragmentFour_to_introFragmentThree"
+            app:destination="@id/introFragmentThree" />
+    </fragment>
+</navigation>
