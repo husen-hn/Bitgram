@@ -13,31 +13,33 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.husen.android.bitgram.R
-import kotlinx.android.synthetic.main.fragment_settings.*
+import com.husen.android.bitgram.databinding.FragmentSettingsBinding
 
 private const val TAG = "SettingsFragment"
 
 class SettingsFragment : Fragment(), View.OnClickListener {
 
+    private lateinit var binding: FragmentSettingsBinding
     lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-        iv_home_s.setOnClickListener(this)
-        cv_last_changes.setOnClickListener(this)
-        cv_share.setOnClickListener(this)
-        cv_about.setOnClickListener(this)
-        cv_suggestion.setOnClickListener(this)
-        cv_familiarity.setOnClickListener(this)
+        binding.ivHomeS.setOnClickListener(this)
+        binding.cvLastChanges.setOnClickListener(this)
+        binding.cvShare.setOnClickListener(this)
+        binding.cvAbout.setOnClickListener(this)
+        binding.cvSuggestion.setOnClickListener(this)
+        binding.cvFamiliarity.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {

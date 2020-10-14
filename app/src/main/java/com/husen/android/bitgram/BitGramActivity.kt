@@ -2,7 +2,6 @@ package com.husen.android.bitgram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_bitgram.*
 
 private const val TAG = "BitGramActivity"
 
