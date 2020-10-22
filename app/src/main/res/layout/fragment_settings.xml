@@ -390,7 +390,7 @@
             android:clickable="true"
             app:borderWidth="0dp"
             android:backgroundTint="@color/colorAccent"
-            android:src="@drawable/ic_search_24"
+            android:src="@drawable/ic_search"
             android:tint="@color/bg"
             app:layout_anchor="@id/bottom_app_bar_s"
             app:maxImageSize="25dp"

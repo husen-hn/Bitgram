@@ -1,7 +1,6 @@
 package com.husen.android.bitgram.Models
 
 import androidx.lifecycle.*
-import com.husen.android.bitgram.Models.*
 import com.husen.android.bitgram.R
 import java.math.RoundingMode
 import java.text.DecimalFormat

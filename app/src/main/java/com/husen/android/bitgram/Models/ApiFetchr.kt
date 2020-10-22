@@ -3,10 +3,7 @@ package com.husen.android.bitgram.Models
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.husen.android.bitgram.DataSource
-import com.husen.android.bitgram.Models.DataSourceItem
-import com.husen.android.bitgram.Models.KucoinItem
-import com.husen.android.bitgram.Models.RamzinexItem
+import com.husen.android.bitgram.Utils.DataSource
 import com.husen.android.bitgram.Network.KucoinApi
 import com.husen.android.bitgram.Network.RamzinexApi
 import com.husen.android.bitgram.Response.KucoinResponse

@@ -1,4 +1,4 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.Adapters
 
 import android.widget.ImageView
 import android.widget.TextView

@@ -35,11 +35,11 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/cv_sv_back"
+                        android:id="@+id/iv_search_view_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:src="@drawable/ic_arrow_back_24"
+                        android:src="@drawable/ic_arrow_back"
                         android:layout_gravity="start|center"
                         android:contentDescription="@string/hide_searching_text_bar" />
 
@@ -57,7 +57,7 @@
                         android:textColorHint="@color/txtColor2"
                         android:textColor="@color/txtColor"
                         android:hint="@string/seach_cryptocurrency"
-                        android:drawableEnd="@drawable/ic_search_24"
+                        android:drawableEnd="@drawable/ic_search"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -96,17 +96,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_fab"
+            android:id="@+id/fab_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             app:borderWidth="0dp"
             android:backgroundTint="@color/colorAccent"
-            android:src="@drawable/ic_search_24"
+            android:src="@drawable/ic_search"
             android:tint="@color/bg"
             app:layout_anchor="@id/bottom_app_bar"
             app:maxImageSize="25dp"
-            android:focusable="true" />
+            android:focusable="true"
+            android:contentDescription="@string/searching" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_app_bar"

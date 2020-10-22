@@ -1,6 +1,6 @@
-package com.husen.android.bitgram.Network.KucoinApi
+package com.husen.android.bitgram.Network
 
-import com.husen.android.bitgram.KucoinResponse
+import com.husen.android.bitgram.Response.KucoinResponse
 import retrofit2.Call
 import retrofit2.http.GET
 

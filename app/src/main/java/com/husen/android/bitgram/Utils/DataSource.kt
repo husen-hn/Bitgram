@@ -1,4 +1,4 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.Utils
 
 import android.util.Log
 import com.husen.android.bitgram.Models.DataSourceItem
@@ -56,18 +56,59 @@ class DataSource {
                     "سنسوریوم", "بیتکوین ای بی سی", "وچین", "ستیروسو", "زی کش", "پل", "دش", "آنتلوجی"
                     , "دیجی بایت", "کوین Crypto.com", "نئو", "نم", "تتر")
                 val bitIconUrl = listOf(
-                    setIconUrl(bitSymbol[0]), setIconUrl(bitSymbol[1]), setIconUrl(bitSymbol[2]) ,
-                    setIconUrl(bitSymbol[3]), setIconUrl(bitSymbol[4]), setIconUrl(bitSymbol[5]) ,
-                    setIconUrl(bitSymbol[6]), setIconUrl(bitSymbol[7]), setIconUrl(bitSymbol[8]),
-                    setIconUrl(bitSymbol[9]), "https://assets-currency.kucoin.com/5d6558dd38300c2b63f7ecdd_logo-p2.png",
+                    setIconUrl(
+                        bitSymbol[0]
+                    ),
+                    setIconUrl(
+                        bitSymbol[1]
+                    ),
+                    setIconUrl(
+                        bitSymbol[2]
+                    ),
+                    setIconUrl(
+                        bitSymbol[3]
+                    ),
+                    setIconUrl(
+                        bitSymbol[4]
+                    ),
+                    setIconUrl(
+                        bitSymbol[5]
+                    ),
+                    setIconUrl(
+                        bitSymbol[6]
+                    ),
+                    setIconUrl(
+                        bitSymbol[7]
+                    ),
+                    setIconUrl(
+                        bitSymbol[8]
+                    ),
+                    setIconUrl(
+                        bitSymbol[9]
+                    ), "https://assets-currency.kucoin.com/5d6558dd38300c2b63f7ecdd_logo-p2.png",
                     "https://assets-currency.kucoin.com/5ce7b35e38300c4320a4fa03_Cosmos_token.png",
-                    setIconUrl("BCHSV"), "https://assets-currency.kucoin.com/5d15789a38300c4320a574e1_Tezos-%28XTZ%29-token-logo-.png",
+                    setIconUrl(
+                        "BCHSV"
+                    ), "https://assets-currency.kucoin.com/5d15789a38300c4320a574e1_Tezos-%28XTZ%29-token-logo-.png",
                     "https://assets-currency.kucoin.com/5d1b3314c29cc606c485e20f_Cardano%EF%BC%88ADA-token-logo-.png",
                     "https://assets-currency.kucoin.com/5e736e355649690008437ef8_47F14068-A607-4FDE-AEF5-A3DC9DC805D2.png",
-                    setIconUrl(bitSymbol[16]), setIconUrl(bitSymbol[17]), "https://assets-currency.kucoin.com/5e54d479f816040008d34fb0_4841.png",
+                    setIconUrl(
+                        bitSymbol[16]
+                    ),
+                    setIconUrl(
+                        bitSymbol[17]
+                    ), "https://assets-currency.kucoin.com/5e54d479f816040008d34fb0_4841.png",
                     "https://assets-currency.kucoin.com/5d1b330ac29cc606c485e20e_Zcash-%28ZEC%29-token-logo-.png",
-                    "https://assets-currency.kucoin.com/5e903e3ff816040008d3c572_POL_token11111.png", setIconUrl(bitSymbol[21]),
-                    setIconUrl(bitSymbol[22]), setIconUrl(bitSymbol[23]), "https://assets-currency.kucoin.com/5cb08e9238300c4320a45e5a_Crypto.com%20Chain_token.png",
+                    "https://assets-currency.kucoin.com/5e903e3ff816040008d3c572_POL_token11111.png",
+                    setIconUrl(
+                        bitSymbol[21]
+                    ),
+                    setIconUrl(
+                        bitSymbol[22]
+                    ),
+                    setIconUrl(
+                        bitSymbol[23]
+                    ), "https://assets-currency.kucoin.com/5cb08e9238300c4320a45e5a_Crypto.com%20Chain_token.png",
                     "https://assets-currency.kucoin.com/5e2128172c0a950008b9b5ef_NEO-token-logo-.png",
                     "https://assets-currency.kucoin.com/5d11efc8134ab772a9abdb39_Nem-Logo-Transparent-Border-.png",
                     "https://assets-currency.kucoin.com/www/coin/pc/USDT.png"

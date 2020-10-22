@@ -1,4 +1,4 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.Fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,10 +18,13 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.husen.android.bitgram.Models.BitGramItem
+import com.husen.android.bitgram.Models.BitGramViewModel
+import com.husen.android.bitgram.BitGramViewModelVM
+import com.husen.android.bitgram.R
 import com.husen.android.bitgram.databinding.BitListCardViewBinding
 import com.husen.android.bitgram.databinding.FragmentBitgramBinding
 import kotlinx.android.synthetic.main.fragment_bitgram.*
-
 
 private const val TAG = "BitgramFragment"
 
@@ -32,7 +34,7 @@ class BitGramFragment : Fragment(), View.OnClickListener {
         ViewModelProvider(this).get(BitGramViewModel::class.java)
     }
     private lateinit var bitGramItemList: List<BitGramItem>
-    private lateinit var bitgramAdapter: BitGramFragment.BitAdapter
+    private lateinit var bitgramAdapter: BitAdapter
     lateinit var navController: NavController
     private lateinit var binding: FragmentBitgramBinding
 
@@ -49,7 +51,8 @@ class BitGramFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil
-            .inflate(inflater, R.layout.fragment_bitgram, container, false)
+            .inflate(inflater,
+                R.layout.fragment_bitgram, container, false)
 
         val view = binding.root
 
@@ -90,10 +93,14 @@ class BitGramFragment : Fragment(), View.OnClickListener {
         super.onStart()
 
         //display search view with animation
-        val slideDown = AnimationUtils.loadAnimation(context, R.anim.slide_down)
-        val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
+        val slideDown = AnimationUtils.loadAnimation(context,
+            R.anim.slide_down
+        )
+        val slideUp = AnimationUtils.loadAnimation(context,
+            R.anim.slide_up
+        )
 
-        btn_fab.setOnClickListener {
+        fab_search.setOnClickListener {
             cv_search.startAnimation(slideDown)
             cv_search.visibility = View.VISIBLE
             //open keyboard
@@ -101,7 +108,7 @@ class BitGramFragment : Fragment(), View.OnClickListener {
             val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
             imm?.showSoftInput(et_search, InputMethodManager.SHOW_IMPLICIT)
         }
-        cv_sv_back.setOnClickListener {
+        iv_search_view_back.setOnClickListener {
             cv_search.startAnimation(slideUp)
             cv_search.visibility = View.GONE
             //hide keyboard
@@ -140,7 +147,8 @@ class BitGramFragment : Fragment(), View.OnClickListener {
         : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.viewModel = BitGramViewModelVM()
+            binding.viewModel =
+                BitGramViewModelVM()
         }
 
         @SuppressLint("SetTextI18n")

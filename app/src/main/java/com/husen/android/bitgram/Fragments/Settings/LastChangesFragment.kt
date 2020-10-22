@@ -1,4 +1,4 @@
-package com.husen.android.bitgram.Fragments.settings
+package com.husen.android.bitgram.Fragments.Settings
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

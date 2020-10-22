@@ -45,4 +45,5 @@
     <string name="IntroFragmentFour">بیش از ۱۰۰+ رمزارز</string>
     <string name="finish">تمام</string>
     <string name="hide_searching_text_bar">Hide searching text bar</string>
+    <string name="searching">searching</string>
 </resources>

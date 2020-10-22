@@ -1,4 +1,4 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.Models
 
 import com.google.gson.annotations.SerializedName
 

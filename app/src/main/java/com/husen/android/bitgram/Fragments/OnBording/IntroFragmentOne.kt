@@ -1,4 +1,4 @@
-package com.husen.android.bitgram.Fragments.onbording
+package com.husen.android.bitgram.Fragments.OnBording
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
