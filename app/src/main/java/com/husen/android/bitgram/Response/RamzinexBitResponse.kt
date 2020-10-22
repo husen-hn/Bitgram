@@ -1,7 +1,6 @@
-package com.husen.android.bitgram.api
+package com.husen.android.bitgram.Network.RamzinexApi
 
 import com.google.gson.annotations.SerializedName
-import com.husen.android.bitgram.RamzinexItem
 
 class RamzinexBitResponse {
     @SerializedName("usdtirr")

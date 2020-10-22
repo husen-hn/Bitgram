@@ -1,8 +1,9 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.husen.android.bitgram.R
 import com.husen.android.bitgram.databinding.ActivityBitgramBinding
 
 private const val TAG = "BitGramActivity"
@@ -13,6 +14,8 @@ class BitGramActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_bitgram)
+        binding = DataBindingUtil.setContentView(this,
+            R.layout.activity_bitgram
+        )
     }
 }

@@ -1,12 +1,8 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.Models
 
-import android.content.Context
-import android.net.Uri
-import android.util.Log
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
-import org.w3c.dom.Text
+import com.husen.android.bitgram.Models.*
+import com.husen.android.bitgram.R
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -200,15 +196,19 @@ class BitGramViewModel : ViewModel() {
             addSign(
                 setCommas(
                     rialToToman((ramzinexItem.lastPrice.toBigDecimal()).toString())
-                ), " تومان"),
+                ), " تومان"
+            ),
             addSign(
                 calIrPercent(
                     ramzinexItem.changePercent,
-                    "0"), "%"),
+                    "0"
+                ), "%"
+            ),
             setPercentColor(
                 calIrPercent(
                     ramzinexItem.changePercent,
-                    "0")
+                    "0"
+                )
             )
         )
     }

@@ -1,4 +1,4 @@
-package com.husen.android.bitgram.api
+package com.husen.android.bitgram.Network.RamzinexApi
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,10 +1,16 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.Models
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.husen.android.bitgram.api.KucoinApi
-import com.husen.android.bitgram.api.RamzinexApi
+import com.husen.android.bitgram.DataSource
+import com.husen.android.bitgram.Models.DataSourceItem
+import com.husen.android.bitgram.Models.KucoinItem
+import com.husen.android.bitgram.Models.RamzinexItem
+import com.husen.android.bitgram.Network.KucoinApi
+import com.husen.android.bitgram.Network.RamzinexApi
+import com.husen.android.bitgram.Response.KucoinResponse
+import com.husen.android.bitgram.Response.RamzinexResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

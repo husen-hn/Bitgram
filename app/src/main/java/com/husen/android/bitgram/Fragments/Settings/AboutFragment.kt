@@ -1,4 +1,4 @@
-package com.husen.android.bitgram.settings
+package com.husen.android.bitgram.Fragments.settings
 
 import android.content.Intent
 import android.net.Uri

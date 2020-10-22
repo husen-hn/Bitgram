@@ -1,7 +1,8 @@
-package com.husen.android.bitgram
+package com.husen.android.bitgram.Models
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.husen.android.bitgram.Models.BitGramItem
 
 class BitGramViewModelVM: BaseObservable() {
 
@@ -50,4 +51,10 @@ class BitGramViewModelVM: BaseObservable() {
     @get:Bindable
     val bitIrPercentColor: Int?
         get() = bitGramItem?.irPercentColor
+
+    companion object {
+        fun newInstance(): BitGramViewModelVM {
+            return BitGramViewModelVM()
+        }
+    }
 }

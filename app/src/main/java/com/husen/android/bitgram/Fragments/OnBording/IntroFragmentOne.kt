@@ -1,4 +1,4 @@
-package com.husen.android.bitgram.onbording
+package com.husen.android.bitgram.Fragments.onbording
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +9,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.husen.android.bitgram.R
 import kotlinx.android.synthetic.main.fragment_intro_one.*
-import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.fragment_settings.iv_home_s
 
 class IntroFragmentOne : Fragment(), View.OnClickListener {
 
