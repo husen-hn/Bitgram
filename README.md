@@ -14,11 +14,7 @@ This project implemented in [Persian language](https://en.wikipedia.org/wiki/Per
 
 ## Previews ⛶
 
-<img src="preview/scone.png" alt="screenshots"  height="350" width="160">
-<img src="preview/sctwo.png" alt="screenshots"  height="350" width="160">
-<img src="preview/scthree.png" alt="screenshots"  height="350" width="160">
-<img src="preview/scfour.png" alt="screenshots"  height="350" width="160">
-<img src="preview/scfive.png" alt="screenshots"  height="350" width="160">
+<img src="preview/scone.png" alt="screenshots"  height="350" width="160"> <img src="preview/sctwo.png" alt="screenshots"  height="350" width="160"> <img src="preview/scthree.png" alt="screenshots"  height="350" width="160"> <img src="preview/scfour.png" alt="screenshots"  height="350" width="160"> <img src="preview/scfive.png" alt="screenshots"  height="350" width="160">
 
 ## Contribute ༜
 Want to contribute? I would really appreciate a hand with the development to add more features in this app.
