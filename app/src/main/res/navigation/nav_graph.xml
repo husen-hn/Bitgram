@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_main_fragment"
-        android:name="com.husen.android.bitgram.Fragments.BitGramFragment"
+        android:name="com.husen.android.bitgram.fragments.BitGramFragment"
         android:label="BitGramFragment"
         tools:layout="@layout/fragment_bitgram">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_settings_fragment"
-        android:name="com.husen.android.bitgram.Fragments.Settings.SettingsFragment"
+        android:name="com.husen.android.bitgram.fragments.Settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -34,17 +34,17 @@
     </fragment>
     <fragment
         android:id="@+id/lastChangesFragment"
-        android:name="com.husen.android.bitgram.Fragments.Settings.LastChangesFragment"
+        android:name="com.husen.android.bitgram.fragments.Settings.LastChangesFragment"
         android:label="fragment_last_changes"
         tools:layout="@layout/fragment_last_changes" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.husen.android.bitgram.Fragments.Settings.AboutFragment"
+        android:name="com.husen.android.bitgram.fragments.Settings.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/introFragmentOne"
-        android:name="com.husen.android.bitgram.Fragments.OnBording.IntroFragmentOne"
+        android:name="com.husen.android.bitgram.fragments.OnBording.IntroFragmentOne"
         android:label="fragment_intro_one"
         tools:layout="@layout/fragment_intro_one" >
         <action
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/introFragmentTwo"
-        android:name="com.husen.android.bitgram.Fragments.OnBording.IntroFragmentTwo"
+        android:name="com.husen.android.bitgram.fragments.OnBording.IntroFragmentTwo"
         android:label="fragment_intro_two"
         tools:layout="@layout/fragment_intro_two" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/introFragmentThree"
-        android:name="com.husen.android.bitgram.Fragments.OnBording.IntroFragmentThree"
+        android:name="com.husen.android.bitgram.fragments.OnBording.IntroFragmentThree"
         android:label="fragment_intro_three"
         tools:layout="@layout/fragment_intro_three" >
         <action
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/introFragmentFour"
-        android:name="com.husen.android.bitgram.Fragments.OnBording.IntroFragmentFour"
+        android:name="com.husen.android.bitgram.fragments.OnBording.IntroFragmentFour"
         android:label="fragment_intro_four"
         tools:layout="@layout/fragment_intro_four" >
         <action

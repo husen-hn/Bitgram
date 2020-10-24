@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.husen.android.bitgram.BitGramViewModelVM" />
+            type="com.husen.android.bitgram.viewmodels.BitGramVM" />
     </data>
 
     <androidx.cardview.widget.CardView
