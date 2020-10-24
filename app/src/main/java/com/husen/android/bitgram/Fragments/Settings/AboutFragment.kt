@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.husen.android.bitgram.databinding.FragmentAboutBinding
+import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment : Fragment() {
 
@@ -24,11 +25,19 @@ class AboutFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-        binding.btnGithub.setOnClickListener {
-            val uri = Uri.parse("https://github.com/husen-hn/Bitgram")
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
+        binding.btnKucoin.setOnClickListener {
+            openUrl("https://www.kucoin.com/")
         }
+        binding.btnRamzinex.setOnClickListener {
+            openUrl("https://ramzinex.com/")
+        }
+        binding.btnGithub.setOnClickListener {
+            openUrl("https://github.com/husen-hn/Bitgram")
+        }
+    }
+    private fun openUrl(url: String) {
+        val uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 }

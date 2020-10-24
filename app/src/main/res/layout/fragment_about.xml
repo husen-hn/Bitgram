@@ -23,20 +23,44 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_github"
+            android:id="@+id/btn_kucoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:drawableEnd="@drawable/ic_kucoin"
+            android:text="@string/kucoin_exchange"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <Button
+            android:id="@+id/btn_ramzinex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:drawableEnd="@drawable/ic_ramzinex"
+            android:text="@string/ramzinex_exchange"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/btn_kucoin" />
+
+        <Button
+            android:id="@+id/btn_github"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:drawableEnd="@drawable/ic_github"
             android:text="@string/source_github"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_ramzinex" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/license"
             android:textColor="@color/txtColor2"
             app:layout_constraintEnd_toEndOf="@+id/btn_github"

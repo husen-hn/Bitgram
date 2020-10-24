@@ -35,7 +35,7 @@
     <string name="_dis_0_2_0">قیمت به تومان\nاضافه شدن ۲۵ رمزارز\nمنو تنظیمات\nجستوجو</string>
     <string name="_dis_1_0_0">انیمشن\nبیش از ۱۰۰ رمزارز\nبهبود عملکرد\nاصلاح باگ های اخیر</string>
     <string name="source_github">سورس کد اپلیکشن در گیتهاب</string>
-    <string name="about_disc">بیگرام اپلیکشنی ساده برای نمایش آخرین قیمت رمزارزها.\n\nدر این پروژه از سرویس های کوکوین و رمزینکس استفاده شده است.</string>
+    <string name="about_disc">بیتگرام اپلیکشنی ساده برای نمایش آخرین قیمت رمزارزها.\n در این پروژه از سرویس های کوکوین و رمزینکس استفاده شده است.</string>
     <string name="license">این اپلیکشن با لایسنس GNU نسخه ۳ منتشر شده است.</string>
     <string name="introFragmentOne">رصد بروز ترین قیمت رمزارزها</string>
     <string name="next">ادامه</string>
@@ -46,4 +46,6 @@
     <string name="finish">تمام</string>
     <string name="hide_searching_text_bar">Hide searching text bar</string>
     <string name="searching">searching</string>
+    <string name="kucoin_exchange">صرافی کوکوین</string>
+    <string name="ramzinex_exchange">صرافی رمزینکس</string>
 </resources>
