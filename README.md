@@ -52,9 +52,9 @@ Feel free to Fork, edit, then pull!
 * [ ] App Widget
 
 ### Release
-* [ ] Direct APK
+* [x] Direct APK
 * [ ] F-Droid
-* [ ] Cafebazaar
+* [x] Cafebazaar
 
 ### Components
 * [x] LiveData
@@ -74,7 +74,7 @@ Feel free to Fork, edit, then pull!
 * [Flaticon](https://www.flaticon.com/home) by [Freepik Company](https://www.freepikcompany.com/)
 
 ## Download ⇣
-[<img src="preview/direct-apk-download.webp" alt="Direct apk download"  height="80">](https://github.com/husen-hn/Bitgram/releases/latest)
+[<img src="preview/get-cafebazaar.webp" alt="Download from Cafebazaar"  height="80">](https://cafebazaar.ir/app/com.husen.android.bitgram)[<img src="preview/direct-apk-download.webp" alt="Direct apk download"  height="80">](https://github.com/husen-hn/Bitgram/releases/latest)
 
 ## License ©
 ```
