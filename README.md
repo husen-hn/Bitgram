@@ -14,7 +14,7 @@ This project implemented in [Persian language](https://en.wikipedia.org/wiki/Per
 
 ## Previews ⛶
 
-<img src="preview/scone.png" alt="screenshots"  height="350" width="160"> <img src="preview/sctwo.png" alt="screenshots"  height="350" width="160"> <img src="preview/scthree.png" alt="screenshots"  height="350" width="160"> <img src="preview/scfour.png" alt="screenshots"  height="350" width="160"> <img src="preview/scfive.png" alt="screenshots"  height="350" width="160">
+<img src="preview/scone.webp" alt="screenshots"  height="350" width="160"> <img src="preview/sctwo.webp" alt="screenshots"  height="350" width="160"> <img src="preview/scthree.webp" alt="screenshots"  height="350" width="160"> <img src="preview/scfour.webp" alt="screenshots"  height="350" width="160"> <img src="preview/scfive.webp" alt="screenshots"  height="350" width="160">
 
 ## Contribute ༜
 Want to contribute? I would really appreciate a hand with the development to add more features in this app.
@@ -74,7 +74,7 @@ Feel free to Fork, edit, then pull!
 * [Flaticon](https://www.flaticon.com/home) by [Freepik Company](https://www.freepikcompany.com/)
 
 ## Download ⇣
-[<img src="preview/get-cafebazaar.webp" alt="Download from Cafebazaar"  height="80">](https://cafebazaar.ir/app/com.husen.android.bitgram)[<img src="preview/direct-apk-download.webp" alt="Direct apk download"  height="80">](https://github.com/husen-hn/Bitgram/releases/latest)
+[<img src="preview/get-cafebazaar.webp" alt="Download from Cafebazaar" height="50">](https://cafebazaar.ir/app/com.husen.android.bitgram) [<img src="preview/direct-apk-download.webp" alt="Direct apk download"  height="51.5">](https://github.com/husen-hn/Bitgram/releases/latest)
 
 ## License ©
 ```
