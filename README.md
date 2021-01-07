@@ -5,7 +5,7 @@ Bitgram
 
 A simple android application that shows latest price of cryptocurrencies.
 
-This project implemented in [Persian language](https://en.wikipedia.org/wiki/Persian_language) and use [KuCoin](https://www.kucoin.com/) and [Ramzinex](https://ramzinex.com/) exchange & trading websites APIs to get the latest prices.
+This project use [KuCoin](https://www.kucoin.com/) and [Ramzinex](https://ramzinex.com/) exchange & trading websites APIs to get the latest prices.
 
 ## Features ☼
 * Display the latest prices in U.S. Dollar
